@@ -60,13 +60,13 @@
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img id="carruselimg" src="media/cianotipia1.jpg" alt="azul1">
+            <img id="carruselimg" src="{% static 'media/cianotipia1.jpg'%}" alt="azul1">
           </div>
           <div class="carousel-item">
-            <img id="carruselimg" src="media/cianotipia2.jpg" alt="azul2">
+            <img id="carruselimg" src="{% static 'media/cianotipia2.jpg'%}" alt="azul2">
           </div>
           <div class="carousel-item">
-            <img id="carruselimg" src="media/cianotipia3.jpg" alt="azul3">
+            <img id="carruselimg" src="{% static 'media/cianotipia3.jpg'%}" alt="azul3">
           </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -83,7 +83,7 @@
 
 <section class="informacion">
   <div class="principal">
-    <img style="width:auto; height: 300px; border-radius:50%" src="media/logo1.jpg" alt="logo">
+    <img style="width:auto; height: 300px; border-radius:50%" src="{% static 'media/logo1.jpg'%}" alt="logo">
     <div class="texto-info">
       <h1>Litorales Creaciones</h1>
       <h5>Productos artesanales para la V Región
@@ -91,8 +91,8 @@
       <p>Pyme ubicada en la V Región dedicada a la confección de productos artesanales con materiales reciclados</p>
       <h3>Te invitamos a conocer nuestros productos</h3>
         <div class="botonescompra">
-          <button style="margin-right:50px"><a href="galeria.html">Galería</a></button>
-          <button style="margin-left: 50px;"><a href="tienda.html">Tienda</a></button>
+          <button style="margin-right:50px"><a href="galeria">Galería</a></button>
+          <button style="margin-left: 50px;"><a href="tienda">Tienda</a></button>
         </div>
     </div>
   </div>
@@ -103,33 +103,33 @@
     <div class="mensaje-cianotipia-posible">
       <p>Hoy existen condiciones adecuadas para realizar revelado solar!</p>
       <div class="imgs-div">
-        <img src="media/film.png" alt="">
-        <img src="media/yes.png" alt="">
+        <img src="{% static 'media/film.png'%}" alt="">
+        <img src="{% static 'media/yes.png'%}" alt="">
       </div>
     </div>
 
     <div class="api-clima">
       <div class="buscar">
         <input type="text" placeholder="Ingrese Ciudad">
-        <button><img src="media/buscar.jpg" alt=""></button>
+        <button><img src="{% static 'media/buscar.jpg'%}" alt=""></button>
       </div>
       <div class="error-api">
           <p>Nombre de ciudad inválido</p>
       </div> 
       <div class="clima">
-          <img src="media/rain.png" class="icono-clima">
+          <img src="{% static 'media/rain.png'%}" class="icono-clima">
           <h1 class="temperatura">0</h1>
           <h2 class="ciudad"></h2>
           <div class="detalles">
             <div class="columna-api">
-              <img src="media/humidity.png">
+              <img src="{% static 'media/humidity.png'%}">
               <div>
                 <p class="humedad">0%</p>
                 <p>Humedad</p>
               </div>
             </div>
             <div class="columna-api">
-              <img src="media/wind.png">
+              <img src="{% static 'media/wind.png'%}">
               <div>
                 <p class="viento">0 km/h</p>
                 <p>Viento</p>
@@ -142,8 +142,8 @@
     <div class="mensaje-cianotipia-noposible">
       <p>Hoy no es un día óptimo para realizar revelado solar</p>
       <div class="imgs-div">
-        <img src="media/film.png" alt="">
-        <img src="media/no.png" alt="">
+        <img src="{% static 'media/film.png'%}" alt="">
+        <img src="{% static 'media/no.png'%}" alt="">
       </div>
     </div>
 
@@ -155,7 +155,7 @@
   <div class="footer">
     <article class="columna">
     <h2>Litorales Creaciones</h2>
-    <img style="width:auto; height: 150px; border-radius:50%" src="media/logo1.jpg" alt="">
+    <img style="width:auto; height: 150px; border-radius:50%" src="{% static 'media/logo1.jpg'%}" alt="">
   </article>
   <article class="columna">
     <p>Pyme dedicada a la confección de productos artesanales ubicada en la V Región</p>
@@ -170,11 +170,11 @@
     </article>
     <article class="columna">
       <ul>
-      <li><a class="footerLink" href="index.html">Inicio</a></li>
-      <li><a class="footerLink" href="tecnicas.html">Técnicas</a></li>
-      <li><a class="footerLink" href="galeria.html">Galeria</a></li>
-      <li><a class="footerLink" href="tienda.html">Tienda</a></li>
-      <li><a class="footerLink" href="login.html">Ingresar</a></li>
+      <li><a class="footerLink" href="index">Inicio</a></li>
+      <li><a class="footerLink" href="tecnicas">Técnicas</a></li>
+      <li><a class="footerLink" href="galeria">Galeria</a></li>
+      <li><a class="footerLink" href="tienda">Tienda</a></li>
+      <li><a class="footerLink" href="login">Ingresar</a></li>
     </ul>
     </article>
   </div>

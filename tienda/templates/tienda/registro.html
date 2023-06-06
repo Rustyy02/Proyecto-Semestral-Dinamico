@@ -20,7 +20,7 @@
     
     <nav class="navbar navbar-expand-lg" style="background-color:midnightblue">
         <div class="container-fluid">
-          <a class="navbar-brand" class="fs-3">Litorales Creaciones <img id="logo" src="media/logo1.jpg" alt="logoL"></a>
+          <a class="navbar-brand" class="fs-3">Litorales Creaciones <img id="logo" src="{% static 'media/logo1.jpg'%}" alt="logoL"></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -129,7 +129,7 @@
         <div class="footer">
           <article class="columna">
           <h2>Litorales Creaciones</h2>
-          <img style="width:auto; height: 150px; border-radius:50%" src="media/logo1.jpg" alt="">
+          <img style="width:auto; height: 150px; border-radius:50%" src="{% static 'media/logo1.jpg'%}" alt="">
         </article>
         <article class="columna">
           <p>Pyme dedicada a la confección de productos artesanales ubicada en la V Región</p>
@@ -144,11 +144,11 @@
           </article>
           <article class="columna">
             <ul>
-            <li><a class="footerLink" href="index.html">Inicio</a></li>
-            <li><a class="footerLink" href="tecnicas.html">Técnicas</a></li>
-            <li><a class="footerLink" href="galeria.html">Galeria</a></li>
-            <li><a class="footerLink" href="tienda.html">Tienda</a></li>
-            <li><a class="footerLink" href="login.html">Ingresar</a></li>
+            <li><a class="footerLink" href="index">Inicio</a></li>
+            <li><a class="footerLink" href="tecnicas">Técnicas</a></li>
+            <li><a class="footerLink" href="galeria">Galeria</a></li>
+            <li><a class="footerLink" href="tienda">Tienda</a></li>
+            <li><a class="footerLink" href="login">Ingresar</a></li>
           </ul>
           </article>
         </div>

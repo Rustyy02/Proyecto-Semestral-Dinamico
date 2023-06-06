@@ -1,0 +1,249 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'estilos.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Karla:wght@200;300;400&display=swap" rel="stylesheet">
+    <title>Litorales Creaciones</title>
+</head>
+
+
+<body>
+    
+  <!-- NAVBAR -->
+
+  <nav class="navbar navbar-expand-lg" style="background-color:midnightblue">
+    <div class="container-fluid">
+      <a class="navbar-brand" class="fs-3">Litorales Creaciones <img id="logo" src="media/logo1.jpg" alt="logoL"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="index.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="tecnicas.html">Técnicas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="galeria.html">Galería</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="catalogo.html">Catálogo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="carro.html">Carro</a>
+        </li>
+          <li class="nav-item">
+            <a class="nav-link" href="login.html">Ingresar</a>
+            
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+<!-- CARRUSEL -->
+
+      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img id="carruselimg" src="media/cianotipia1.jpg" alt="azul1">
+          </div>
+          <div class="carousel-item">
+            <img id="carruselimg" src="media/cianotipia2.jpg" alt="azul2">
+          </div>
+          <div class="carousel-item">
+            <img id="carruselimg" src="media/cianotipia3.jpg" alt="azul3">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+<!-- CARRUSEL -->
+
+<section class="informacion">
+  <div class="principal">
+    <img style="width:auto; height: 300px; border-radius:50%" src="media/logo1.jpg" alt="logo">
+    <div class="texto-info">
+      <h1>Litorales Creaciones</h1>
+      <h5>Productos artesanales para la V Región
+      </h5>
+      <p>Pyme ubicada en la V Región dedicada a la confección de productos artesanales con materiales reciclados</p>
+      <h3>Te invitamos a conocer nuestros productos</h3>
+        <div class="botonescompra">
+          <button style="margin-right:50px"><a href="galeria.html">Galería</a></button>
+          <button style="margin-left: 50px;"><a href="tienda.html">Tienda</a></button>
+        </div>
+    </div>
+  </div>
+  </section>
+
+  <div class="columnas-api">
+
+    <div class="mensaje-cianotipia-posible">
+      <p>Hoy existen condiciones adecuadas para realizar revelado solar!</p>
+      <div class="imgs-div">
+        <img src="media/film.png" alt="">
+        <img src="media/yes.png" alt="">
+      </div>
+    </div>
+
+    <div class="api-clima">
+      <div class="buscar">
+        <input type="text" placeholder="Ingrese Ciudad">
+        <button><img src="media/buscar.jpg" alt=""></button>
+      </div>
+      <div class="error-api">
+          <p>Nombre de ciudad inválido</p>
+      </div> 
+      <div class="clima">
+          <img src="media/rain.png" class="icono-clima">
+          <h1 class="temperatura">0</h1>
+          <h2 class="ciudad"></h2>
+          <div class="detalles">
+            <div class="columna-api">
+              <img src="media/humidity.png">
+              <div>
+                <p class="humedad">0%</p>
+                <p>Humedad</p>
+              </div>
+            </div>
+            <div class="columna-api">
+              <img src="media/wind.png">
+              <div>
+                <p class="viento">0 km/h</p>
+                <p>Viento</p>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="mensaje-cianotipia-noposible">
+      <p>Hoy no es un día óptimo para realizar revelado solar</p>
+      <div class="imgs-div">
+        <img src="media/film.png" alt="">
+        <img src="media/no.png" alt="">
+      </div>
+    </div>
+
+</div>
+
+
+
+<footer>
+  <div class="footer">
+    <article class="columna">
+    <h2>Litorales Creaciones</h2>
+    <img style="width:auto; height: 150px; border-radius:50%" src="media/logo1.jpg" alt="">
+  </article>
+  <article class="columna">
+    <p>Pyme dedicada a la confección de productos artesanales ubicada en la V Región</p>
+  </article>
+    <article class="columna">
+      <h3 class="titulo-columna">Contacto</h3>
+      <ul>
+        <li><a class="footerLink" href="">Instagram</a></li>
+        <li><a class="footerLink" href="">Facebook</a></li>
+        <li><a class="footerLink" href="">Twitter</a></li>
+      </ul>
+    </article>
+    <article class="columna">
+      <ul>
+      <li><a class="footerLink" href="index.html">Inicio</a></li>
+      <li><a class="footerLink" href="tecnicas.html">Técnicas</a></li>
+      <li><a class="footerLink" href="galeria.html">Galeria</a></li>
+      <li><a class="footerLink" href="tienda.html">Tienda</a></li>
+      <li><a class="footerLink" href="login.html">Ingresar</a></li>
+    </ul>
+    </article>
+  </div>
+  <div class="footer"><p>Copyright © 2023 Litorales Creaciones</p></div>
+</footer>
+
+<script>
+  const apiKey = "c516626f417d7cb5a15fefb8c8c45c13";
+  const apiURL = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+  
+  const busqueda = document.querySelector(".buscar input");
+  const botonbusqueda = document.querySelector(".buscar button");
+  const iconoclima = document.querySelector(".icono-clima");
+
+  async function checkWeather(ciudad){
+    const response = await fetch(apiURL + ciudad + `&appid=${apiKey}`);
+    
+    if(response.status == 404){
+      document.querySelector(".error-api").style.display = "block";
+      document.querySelector(".clima").style.display = "none";
+    } else{
+
+    var data = await response.json();
+
+    console.log(data);
+  
+    document.querySelector(".ciudad").innerHTML = data.name;
+    document.querySelector(".temperatura").innerHTML = Math.round(data.main.temp) + "°C";
+    document.querySelector(".humedad").innerHTML = Math.round(data.main.temp) + " %";
+    document.querySelector(".viento").innerHTML = data.wind.speed + " km/h";
+  
+    if (data.weather[0].main == "Clouds"){
+      iconoclima.src = "media/clouds.png";
+    }else if (data.weather[0].main == "Clear"){
+      iconoclima.src = "media/clear.png";
+    }else if (data.weather[0].main == "Rain"){
+      iconoclima.src = "media/rain.png";
+    }else if (data.weather[0].main == "Snow"){
+      iconoclima.src = "media/snow.png";
+    }else if (data.weather[0].main == "Drizzle"){
+      conoclima.src = "media/drizzle.png";
+    }else if (data.weather[0].main == "Mist"){
+      conoclima.src = "media/mist.png";
+    }
+
+    if(data.weather[0].main == "Clear"){
+      document.querySelector(".mensaje-cianotipia-posible").style.display = "block"
+      document.querySelector(".mensaje-cianotipia-noposible").style.display = "none"
+    }else{
+      document.querySelector(".mensaje-cianotipia-posible").style.display = "none"
+      document.querySelector(".mensaje-cianotipia-noposible").style.display = "block"
+    }
+
+    document.querySelector(".clima").style.display = "block";
+    document.querySelector(".error-api").style.display = "none";
+
+
+  }
+}
+
+
+  botonbusqueda.addEventListener("click", ()=>{
+    checkWeather(busqueda.value);
+  })
+
+
+</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.min.js" integrity="sha384-heAjqF+bCxXpCWLa6Zhcp4fu20XoNIA98ecBC1YkdXhszjoejr5y9Q77hIrv8R9i" crossorigin="anonymous"></script>
+</body>
+</html>

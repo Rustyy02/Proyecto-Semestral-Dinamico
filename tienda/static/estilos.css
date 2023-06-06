@@ -1,0 +1,780 @@
+*{
+    font-family: 'Karla', sans-serif;
+}
+
+#carruselimg {
+  width: 100%;
+  height: 30%;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  padding-right: 20px;
+  border-radius: 25px;
+}
+
+.titulo1{
+    display: grid;
+    grid-auto-flow: row;
+    padding-top: 20px;
+    padding-left: 30px;
+    color:black;
+    letter-spacing: 2px;
+  
+}
+
+#icono {
+  width: 20px;
+  height: 15px;
+  float: inline-start;
+}
+
+#iconolinks {
+  width: 50;
+  height: 50px;
+  float: inline-start;
+  border-radius: 50%;
+}
+
+#logo {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+#fotoperfil {
+  padding-right: 30px;
+  width: 40%;
+  height: 40%;
+}
+
+.navbar-brand {
+  color: antiquewhite;
+}
+
+.nav-link{
+  color: antiquewhite;
+}
+
+.navbar-toggler{
+  color: antiquewhite;
+  background-color: antiquewhite;
+}
+.navbar-toggler-icon{
+  background-color: antiquewhite;
+}
+
+#links1 {
+  padding-top: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 50px;
+}
+
+body {
+background-color: antiquewhite;
+}
+
+#galeriadiv {
+  padding-top: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.card-body {
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.container {
+  text-align: center;
+}
+
+.container h5 {
+  padding-top: 50px;
+  color: rgb(0, 0, 0);
+  font-size: 150%;
+}
+.container-img img {
+  display: inline-block;
+  padding: 20px;
+  width: 100%;
+}
+
+.container-img img:hover {
+  filter: blur(2px);
+  transition: all 0.2s ease-in-out;
+}
+
+.modal-body li {
+  margin-left: 20px;
+  padding: 3px;
+}
+
+.card-body{
+    border-radius: 10px;
+}
+
+/*------------CARRITO--------------*/
+
+.carrito {
+  margin: 80px auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: solid;
+}
+.carro-info {
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: solid;
+  padding-bottom: 10px;
+
+}
+th {
+  text-align: left;
+  padding: 5px;
+  color: #fff;
+  background-color:#683b11;
+}
+td {
+  padding: 10px 10px;
+}
+.carro-info img {
+  width: 200px;
+  height: 150px;
+  margin-right: 10px;
+  border: solid;
+}
+td a {
+  font-size: 13px;
+  color: blueviolet;
+}
+td p {
+  text-align: right;
+}
+
+.valor-total {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.valor-total table {
+  border-top: 4px solid #683b11;
+  width: 100%;
+  max-width: 350px;
+  border-bottom: 4px solid #683b11;
+  background-color: antiquewhite;
+}
+
+.valor-total td {
+  text-align: right;
+}
+
+.valor-total th {
+  text-align: right;
+}
+
+.botoncompra {
+  
+  background-color:#683b11;
+  border: transparent;
+  border-radius: 10px;
+  color: #ffffff;
+  padding: 6px;
+  transition-duration: 0.2s;
+  margin-top: 20px;
+  max-width: 300px;
+}
+
+.botoncompra a{
+  text-decoration: none;
+  color: antiquewhite;
+}
+
+.botoncompra:hover {
+  opacity: 0.8;
+}
+
+.botonescompra{
+  display: flex;
+  margin: 30px;
+  justify-content: space-between;
+}
+
+#d {
+  text-align: center;
+  padding-right: 5%;
+}
+
+/*------------Técnicas--------------*/
+
+/*------------Izquierda-------------*/
+.informacion{
+    width:100%;
+    padding: 78px 0px;
+}
+
+.informacion h1{
+    color:black;
+}
+
+.informacion img{
+    float: left;
+    position: static;
+    height: auto;
+    width: 50%;
+    padding: 20px;
+    min-width: 300px;
+    min-height: 200px;
+}
+
+.texto-info{
+    width:550px;
+    color:black;
+}
+
+.texto-info button{
+  background-color:#683b11;
+  border: transparent;
+  border-radius: 10px;
+  padding: 5px;
+  transition-duration: 0.2s;
+  margin-top: 20px;
+  max-width: 300px;
+}
+
+.texto-info button :hover{
+  opacity: 0.8;
+}
+
+.texto-info button a{
+  text-decoration: none;
+  color: antiquewhite;
+}
+
+.principal{
+    width: 1130px;
+    max-width: 95%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content:space-around;
+}
+
+/*------------Derecha-------------*/
+
+.informacion2{
+    width:100%;
+    padding: 78px 0px;
+}
+
+.informacion2 h1{
+    color:black;
+}
+
+.informacion2 img{
+    height: auto;
+    width: 50%;
+    padding: 20px;
+    min-width: 300px;
+    min-height: 200px;
+}
+
+.texto-info2{
+    width:550px;
+    color:black;
+}
+
+.principal2{
+    width: 1130px;
+    max-width: 95%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+}
+
+/*------------Footer-------------*/
+
+.footer{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 1rem;
+  background-color:midnightblue;
+}
+
+@media (min-width: 700px){
+  .footer{
+    flex-direction: row;
+  }
+}
+
+.footer > * {
+  flex:1;
+  color: antiquewhite;
+}
+
+.footerLink{
+  text-decoration: none;
+  color: antiquewhite;
+}
+
+.footerLink:hover{
+  color:#683b11;
+}
+
+/*------------Formularios-------------*/
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background: antiquewhite;
+}
+
+main {
+	max-width: 800px;
+	width: 90%;
+	margin: auto;
+	padding: 40px;
+}
+
+.formulario {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 20px;
+  margin: 20px;
+}
+
+.formulario__label {
+	display: block;
+	font-weight: 700;
+	padding: 10px;
+	cursor: pointer;
+}
+
+.formulario__grupo-input {
+	position: relative;
+}
+
+.formulario__input {
+	width: 100%;
+	background: #fff;
+	border: 3px solid transparent;
+	border-radius: 3px;
+	height: 45px;
+	line-height: 45px;
+	padding: 0 40px 0 10px;
+	transition: .3s ease all;
+}
+
+.formulario__input:focus {
+	border: 3px solid #0075FF;
+	outline: none;
+	box-shadow: 3px 0px 30px rgba(163,163,163, 0.4);
+}
+
+.formulario__input-error {
+	font-size: 12px;
+	margin-bottom: 0;
+	display: none;
+}
+
+.formulario__input-error-activo {
+	display: block;
+}
+
+.formulario__validacion-estado {
+	position: absolute;
+	right: 10px;
+	bottom: 15px;
+	z-index: 100;
+	font-size: 16px;
+	opacity: 0;
+}
+
+.formulario__checkbox {
+	margin-right: 10px;
+}
+
+.formulario__grupo-terminos, 
+.formulario__mensaje,
+.formulario__grupo-btn-enviar {
+	grid-column: span 2;
+}
+
+.formulario__mensaje {
+	height: 45px;
+	line-height: 45px;
+	background: #F66060;
+	padding: 0 15px;
+	border-radius: 3px;
+	display: none;
+}
+
+.formulario__mensaje-activo {
+	display: block;
+}
+
+.formulario__mensaje p {
+	margin: 0;
+}
+
+.formulario__grupo-btn-enviar {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.formulario__btn {
+	height: 45px;
+	line-height: 45px;
+	width: 30%;
+	background: #000;
+	color: #fff;
+	font-weight: bold;
+	border: none;
+	border-radius: 3px;
+	cursor: pointer;
+	transition: .1s ease all;
+  margin-bottom: 10px;
+}
+
+.formulario__btn:hover {
+	box-shadow: 3px 0px 30px rgba(163,163,163, 1);
+}
+
+.formulario__mensaje-exito {
+	font-size: 14px;
+	color: #119200;
+	display: none;
+}
+
+.formulario__mensaje-exito-activo {
+	display: block;
+}
+
+/* ----- -----  Estilos para Validacion ----- ----- */
+.formulario__grupo-correcto .formulario__validacion-estado {
+	color: #1ed12d;
+	opacity: 1;
+}
+
+.formulario__grupo-incorrecto .formulario__label {
+	color: #bb2929;
+}
+
+.formulario__grupo-incorrecto .formulario__validacion-estado {
+	color: #bb2929;
+	opacity: 1;
+}
+
+.formulario__grupo-incorrecto .formulario__input {
+	border: 3px solid #bb2929;
+}
+
+
+/*------------Media queries para formularios-------------*/
+
+@media screen and (max-width: 800px) {
+	.formulario {
+		grid-template-columns: 1fr;
+	}
+
+	.formulario__grupo-terminos, 
+	.formulario__mensaje,
+	.formulario__grupo-btn-enviar {
+		grid-column: 1;
+	}
+
+	.formulario__btn {
+		width: 100%;
+	}
+}
+
+/*------------API clima-------------*/
+
+.api-clima{
+  width: 90%;
+  max-width: 470px;
+  background: #683b11;
+  color: antiquewhite;
+  border-radius: 10px;
+  margin: 100px auto 100px;
+  padding: 40px 35px;
+  text-align: center;
+}
+
+.buscar{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.buscar input{
+  border: 0;
+  outline: 0;
+  background: antiquewhite;
+  color: #000;
+  padding: 10px 25px;
+  height: 60px;
+  border-radius: 30px;
+  flex: 1;
+  margin-right: 16px;
+  font-size: 18px;
+}
+
+.buscar button{
+  border: 0;
+  outline: 0;
+  background: antiquewhite;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+}
+
+.buscar button img {
+  width: 30px;
+}
+
+.icono-clima {
+  width: 170px;
+  margin-top: 30px;
+}
+
+.clima h1{
+  font-size: 80px;
+  font-weight: 500;
+}
+
+.clima h2{
+  font-size: 45px;
+  font-weight: 400;
+  margin-top: -10px;
+}
+
+.detalles{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  margin-top: 50px;
+}
+
+.columna-api{
+  display:flex;
+  align-items: center;
+  text-align: left;
+}
+
+.columna-api img {
+  width: 40px;
+  margin-right: 10px;
+}
+
+.humidity, .wind{
+  font-size: 28px;
+  margin-top: -6px;
+}
+
+.error-api{
+  text-align: left;
+  margin-left: 10px;
+  font-size: 14px;
+  margin-top: 10px;
+  display: none;
+}
+
+.columnas-api{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+/*------------Mensajes Cianotipia API-------------*/
+
+.mensaje-cianotipia-posible{
+  
+  background-color:#683b11;
+  margin: 20vh;
+  border-radius: 20%;
+  max-height: 500px;
+  padding-top: 100px;
+  display: none;
+
+}
+
+.mensaje-cianotipia-noposible{
+  
+  background-color:#683b11;
+  margin: 20vh;
+  border-radius: 20%;
+  max-height: 500px;
+  padding-top: 100px;
+  display: none;
+}
+
+.imgs-div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.imgs-div img{
+  width: 200px;
+}
+
+.mensaje-cianotipia-posible p{
+  color: antiquewhite;
+  padding: 10px;
+  text-align-last: center;
+}
+
+.mensaje-cianotipia-noposible p{
+  color: antiquewhite;
+  padding: 10px;
+  text-align-last: center;
+}
+
+/*------------ Login ------------*/
+
+
+.inputLogin{
+  width: 40vw;
+	background: #fff;
+	border: 3px solid transparent;
+	border-radius: 3px;
+	height: 45px;
+	line-height: 45px;
+	padding: 0 40px 0 10px;
+	transition: .3s ease all;
+  max-width: 100%;
+  min-width: 93%;
+}
+
+
+#textoh1Login{
+  color: #fff;
+  font-size: 40px;
+  padding-bottom: 15px;
+}
+
+.textoLogin{
+	font-weight: 700;
+  padding-top: 30px;
+  text-align: left;
+  color: #fff;
+}
+
+.input_box i{
+  position: absolute;
+  color: #fff;
+  font-size: 20px;
+  padding-right: 1%;
+
+}
+
+
+.containerLogin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  
+}
+.form-group{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  background-color: #683b11;
+  padding: 45px;
+  text-align: center;
+  border-radius: 10px;
+  max-width: 600px;
+  min-width: 200px;
+  margin-top: 50px;
+}
+
+
+
+form .fa-solid.email,.fa-solid.password{
+  color: #fff;
+  right: 4%;
+  font-size: 25px;
+
+}
+
+.formulario_labelLogin{
+  color: #fff;
+  pointer-events: none;
+}
+.form-group i.fa-user{
+  color: #fff;
+  padding: 10px;
+  font-size: 50px;
+}
+
+.formulario_labelLogin{
+  display: block;
+	font-weight: 700;
+	padding: 10px;
+	cursor: pointer;
+}
+.formulario_inputLogin{
+  width: 30vw;
+	background: #ffffff;
+	border: 3px solid transparent;
+	border-radius: 3px;
+	height: 45px;
+	line-height: 45px;
+	padding: 0 40px 0 10px;
+	transition: .3s ease all;
+  max-width: 90%;
+  min-width: 200px;
+}
+
+.formulario_btnLogin{
+  height: 45px;
+	line-height: 45px;
+	width: 60%;
+	background: #000;
+	color: #fff;
+	font-weight: bold;
+	border: none;
+	border-radius: 3px;
+	cursor: pointer;
+  margin-top: 15px;
+}
+
+#linkLogin{
+  position:relative;
+  right: -20%;
+  height: 45px;
+	line-height: 45px;
+	width: 60%;
+	background: #000;
+	color: #fff;
+	font-weight: bold;
+	border: none;
+	border-radius: 3px;
+	cursor: pointer;
+  text-decoration: none;
+  outline: none;
+  margin-top: 10px;
+}

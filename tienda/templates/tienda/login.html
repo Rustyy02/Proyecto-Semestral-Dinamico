@@ -1,0 +1,125 @@
+(% load static %)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <link rel="stylesheet" href="estilos.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Karla:wght@200;300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Login</title>
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg" style="background-color:midnightblue">
+        <div class="container-fluid">
+          <a class="navbar-brand" class="fs-3">Litorales Creaciones <img id="logo" src="media/logo1.jpg" alt="logoL"></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="index.html">Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="tecnicas.html">Técnicas</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="galeria.html">Galería</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="catalogo.html">Catálogo</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="carro.html">Carro</a>
+            </li>
+              <li class="nav-item">
+                <a class="nav-link" href="login.html">Ingresar</a>
+                
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+
+      <form class="containerLogin" id="formularioLogin">
+        <div class="form-group">
+          <h1 id="textoh1Login">Login</h1>
+          <i class="fa-solid fa-user"></i>
+
+        <!-- Grupo: Correo Electronico -->
+        <div class="formulario_grupoLogin" id="grupo_email">
+          <label for="correo" class="formulario_labelLogin">Correo Electrónico</label>
+          <div class="formulario_grupoLogin-input">  
+            <i class="formulario_validacionLogin-estado fa-solid fa-envelope email"></i>
+            <input type="email" class="formulario_inputLogin" name="email" id="email" placeholder="correo@gmail.com">
+          </div>
+
+        </div>
+
+        <!-- Grupo: Contraseña -->
+        <div class="formulario_grupoLogin" id="grupoLogin_password">
+          <label for="password" class="textoLogin">Contraseña</label>
+          <div class="formulario_grupoLogin-input">
+            <i class="fa-solid fa-lock password"></i>
+            <input type="password" class="formulario_inputLogin" name="password" id="password" placeholder="Contraseña">
+            <i class="formulario_validacionLogin-estado"></i>
+            <div>
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="formulario_grupoLogin formulario_grupoLogin-btn-ingresar">
+          <button type="submit" class="formulario_btnLogin">Ingresar</button>
+        </div>
+        <a id="linkLogin" type="boton" href="registro.html">Resgistrarse</a>
+      </div>
+  </form>
+
+
+
+
+
+
+      <footer>
+        <div class="footer">
+          <article class="columna">
+          <h2>Litorales Creaciones</h2>
+          <img style="width:auto; height: 150px; border-radius:50%" src="media/logo1.jpg" alt="">
+        </article>
+        <article class="columna">
+          <p>Pyme dedicada a la confección de productos artesanales ubicada en la V Región</p>
+        </article>
+          <article class="columna">
+            <h3 class="titulo-columna">Contacto</h3>
+            <ul>
+              <li><a class="footerLink" href="">Instagram</a></li>
+              <li><a class="footerLink" href="">Facebook</a></li>
+              <li><a class="footerLink" href="">Twitter</a></li>
+            </ul>
+          </article>
+          <article class="columna">
+            <ul>
+            <li><a class="footerLink" href="index.html">Inicio</a></li>
+            <li><a class="footerLink" href="tecnicas.html">Técnicas</a></li>
+            <li><a class="footerLink" href="galeria.html">Galeria</a></li>
+            <li><a class="footerLink" href="tienda.html">Tienda</a></li>
+            <li><a class="footerLink" href="login.html">Ingresar</a></li>
+          </ul>
+          </article>
+        </div>
+        <div class="footer"><p>Copyright © 2023 Litorales Creaciones</p></div>
+      </footer>
+      
+
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.min.js" integrity="sha384-heAjqF+bCxXpCWLa6Zhcp4fu20XoNIA98ecBC1YkdXhszjoejr5y9Q77hIrv8R9i" crossorigin="anonymous"></script>
+</body>
+</html>

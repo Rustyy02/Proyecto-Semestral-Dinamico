@@ -19,7 +19,7 @@
 
   <nav class="navbar navbar-expand-lg" style="background-color:midnightblue">
     <div class="container-fluid">
-      <a class="navbar-brand" class="fs-3">Litorales Creaciones <img id="logo" src="media/logo1.jpg" alt="logoL"></a>
+      <a class="navbar-brand" class="fs-3">Litorales Creaciones <img id="logo" src="{% static 'media/logo1.jpg'%}" alt="logoL"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
           </button>
@@ -62,7 +62,7 @@
         <tr>
             <td>
                 <div class="carro-info">
-                    <img src="media/cianotipia5.jpg" alt="EFrancesa1">
+                    <img src="{% static 'media/cianotipia5.jpg'%}" alt="EFrancesa1">
                     <div>
                         <p>Encuadernación Francesa</p>
                         <small>Valor: $12.000</small>
@@ -78,7 +78,7 @@
         <tr>
             <td>
                 <div class="carro-info">
-                    <img src="media/cianotipia14.jpg" alt="EFrancesa1">
+                    <img src="{% static 'media/cianotipia14.jpg'%}" alt="EFrancesa1">
                     <div>
                         <p>Cuaderno con tapa en Cianotipia</p>
                         <small>Valor: $6.000</small>
@@ -113,8 +113,8 @@
 
 
 <div class="botonescompra">
-    <button class="botoncompra"><a href="tienda.html">Seguir Viendo</a></button>
-    <button class="botoncompra"><a href="pago.html">Pagar</a></button>
+    <button class="botoncompra"><a href="tienda">Seguir Viendo</a></button>
+    <button class="botoncompra"><a href="pago">Pagar</a></button>
 </div>
 
 
@@ -122,7 +122,7 @@
     <div class="footer">
       <article class="columna">
       <h2>Litorales Creaciones</h2>
-      <img style="width:auto; height: 150px; border-radius:50%" src="media/logo1.jpg" alt="">
+      <img style="width:auto; height: 150px; border-radius:50%" src="{% static 'media/logo1.jpg'%}" alt="">
     </article>
     <article class="columna">
       <p>Pyme dedicada a la confección de productos artesanales ubicada en la V Región</p>

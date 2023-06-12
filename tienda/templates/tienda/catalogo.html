@@ -23,7 +23,7 @@
 
     <nav class="navbar navbar-expand-lg" style="background-color:midnightblue">
       <div class="container-fluid">
-        <a class="navbar-brand" class="fs-3">Litorales Creaciones <img id="logo" src="media/logo1.jpg" alt="logoL"></a>
+        <a class="navbar-brand" class="fs-3">Litorales Creaciones <img id="logo" src="{% static 'media/logo1.jpg'%}" alt="logoL"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -55,686 +55,233 @@
 
 
     <h1 class="titulo1">Tienda</h1>
-    <div class="div-imagen-fondo">
-      <div class="container">
 
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
 
+          // Variables
+          const baseDeDatos = [
+              {
+                  id: 1,
+                  nombre: 'Patata',
+                  precio: 1,
+                  imagen: 'patata.jpg'
+              },
+              {
+                  id: 2,
+                  nombre: 'Cebolla',
+                  precio: 1.2,
+                  imagen: 'cebolla.jpg'
+              },
+              {
+                  id: 3,
+                  nombre: 'Calabacin',
+                  precio: 2.1,
+                  imagen: 'calabacin.jpg'
+              },
+              {
+                  id: 4,
+                  nombre: 'Fresas',
+                  precio: 0.6,
+                  imagen: 'fresas.jpg'
+              }
 
-        <!-- Cuadernos de Cianotipia -->
-        <h5>Cuadernos de Cianotipia</h5>
+          ];
+
+          let carrito = [];
+          const divisa = 'CLP';
+          const DOMitems = document.querySelector('#items');
+          const DOMcarrito = document.querySelector('#carrito');
+          const DOMtotal = document.querySelector('#total');
+          const DOMbotonVaciar = document.querySelector('#boton-vaciar');
+          const miLocalStorage = window.localStorage;
+
+// Funciones
+
+/**
+* Dibuja todos los productos a partir de la base de datos. No confundir con el carrito
+*/
+          function renderizarProductos() {
+              baseDeDatos.forEach((info) => {
+                  // Estructura
+                  const miNodo = document.createElement('div');
+                  miNodo.classList.add('card', 'col-sm-4');
+                  // Body
+                  const miNodoCardBody = document.createElement('div');
+                  miNodoCardBody.classList.add('card-body');
+                  // Titulo
+                  const miNodoTitle = document.createElement('h5');
+                  miNodoTitle.classList.add('card-title');
+                  miNodoTitle.textContent = info.nombre;
+                  // Imagen
+                  const miNodoImagen = document.createElement('img');
+                  miNodoImagen.classList.add('img-fluid');
+                  miNodoImagen.setAttribute('src', info.imagen);
+                  // Precio
+                  const miNodoPrecio = document.createElement('p');
+                  miNodoPrecio.classList.add('card-text');
+                  miNodoPrecio.textContent = `${info.precio}${divisa}`;
+                  // Boton 
+                  const miNodoBoton = document.createElement('button');
+                  miNodoBoton.classList.add('btn', 'btn-primary');
+                  miNodoBoton.textContent = '+';
+                  miNodoBoton.setAttribute('marcador', info.id);
+                  miNodoBoton.addEventListener('click', anyadirProductoAlCarrito);
+                  // Insertamos
+                  miNodoCardBody.appendChild(miNodoImagen);
+                  miNodoCardBody.appendChild(miNodoTitle);
+                  miNodoCardBody.appendChild(miNodoPrecio);
+                  miNodoCardBody.appendChild(miNodoBoton);
+                  miNodo.appendChild(miNodoCardBody);
+                  DOMitems.appendChild(miNodo);
+              });
+          }
+
+/**
+* Evento para añadir un producto al carrito de la compra
+*/
+          function anyadirProductoAlCarrito(evento) {
+              // Anyadimos el Nodo a nuestro carrito
+              carrito.push(evento.target.getAttribute('marcador'))
+              // Actualizamos el carrito 
+              renderizarCarrito();
+              // Actualizamos el LocalStorage
+              guardarCarritoEnLocalStorage();
+          }
+
+/**
+* Dibuja todos los productos guardados en el carrito
+*/
+          function renderizarCarrito() {
+              // Vaciamos todo el html
+              DOMcarrito.textContent = '';
+              // Quitamos los duplicados
+              const carritoSinDuplicados = [...new Set(carrito)];
+              // Generamos los Nodos a partir de carrito
+              carritoSinDuplicados.forEach((item) => {
+                  // Obtenemos el item que necesitamos de la variable base de datos
+                  const miItem = baseDeDatos.filter((itemBaseDatos) => {
+                      // ¿Coincide las id? Solo puede existir un caso
+                      return itemBaseDatos.id === parseInt(item);
+                  });
+                  // Cuenta el número de veces que se repite el producto
+                  const numeroUnidadesItem = carrito.reduce((total, itemId) => {
+                      // ¿Coincide las id? Incremento el contador, en caso contrario no mantengo
+                      return itemId === item ? total += 1 : total;
+                  }, 0);
+                  // Creamos el nodo del item del carrito
+                  const miNodo = document.createElement('li');
+                  miNodo.classList.add('list-group-item', 'text-right', 'mx-2');
+                  miNodo.textContent = `${numeroUnidadesItem} x ${miItem[0].nombre} - ${miItem[0].precio}${divisa}`;
+                  // Boton de borrar
+                  const miBoton = document.createElement('button');
+                  miBoton.classList.add('btn', 'btn-danger', 'mx-5');
+                  miBoton.textContent = 'X';
+                  miBoton.style.marginLeft = '1rem';
+                  miBoton.dataset.item = item;
+                  miBoton.addEventListener('click', borrarItemCarrito);
+                  // Mezclamos nodos
+                  miNodo.appendChild(miBoton);
+                  DOMcarrito.appendChild(miNodo);
+              });
+              // Renderizamos el precio total en el HTML
+              DOMtotal.textContent = calcularTotal();
+          }
+
+          /**
+          * Evento para borrar un elemento del carrito
+          */
+          function borrarItemCarrito(evento) {
+              // Obtenemos el producto ID que hay en el boton pulsado
+              const id = evento.target.dataset.item;
+              // Borramos todos los productos
+              carrito = carrito.filter((carritoId) => {
+                  return carritoId !== id;
+              });
+              // volvemos a renderizar
+              renderizarCarrito();
+              // Actualizamos el LocalStorage
+              guardarCarritoEnLocalStorage();
+
+          }
+
+          /**
+           * Calcula el precio total teniendo en cuenta los productos repetidos
+           */
+          function calcularTotal() {
+              // Recorremos el array del carrito 
+              return carrito.reduce((total, item) => {
+                  // De cada elemento obtenemos su precio
+                  const miItem = baseDeDatos.filter((itemBaseDatos) => {
+                      return itemBaseDatos.id === parseInt(item);
+                  });
+                  // Los sumamos al total
+                  return total + miItem[0].precio;
+              }, 0).toFixed(2);
+          }
+
+          /**
+          * Varia el carrito y vuelve a dibujarlo
+          */
+          function vaciarCarrito() {
+              // Limpiamos los productos guardados
+              carrito = [];
+              // Renderizamos los cambios
+              renderizarCarrito();
+              // Borra LocalStorage
+              localStorage.clear();
+
+          }
+
+          function guardarCarritoEnLocalStorage () {
+              miLocalStorage.setItem('carrito', JSON.stringify(carrito));
+          }
+
+          function cargarCarritoDeLocalStorage () {
+              // ¿Existe un carrito previo guardado en LocalStorage?
+              if (miLocalStorage.getItem('carrito') !== null) {
+                  // Carga la información
+                  carrito = JSON.parse(miLocalStorage.getItem('carrito'));
+              }
+          }
+
+          // Eventos
+          DOMbotonVaciar.addEventListener('click', vaciarCarrito);
+
+          // Inicio
+          cargarCarritoDeLocalStorage();
+          renderizarProductos();
+          renderizarCarrito();
+      });
+  </script>
+</head>
+<body>
+  <div class="container">
+      <div class="row">
+          <!-- Elementos generados a partir del JSON -->
+          <main id="items" class="col-sm-8 row"></main>
+          <!-- Carrito -->
+          <aside class="col-sm-4">
+              <h2>Carrito</h2>
+              <!-- Elementos del carrito -->
+              <ul id="carrito" class="list-group"></ul>
+              <hr>
+              <!-- Precio total -->
+              <p class="text-right">Total: <span id="total"></span>&euro;</p>
+              <button id="boton-vaciar" class="btn btn-danger">Vaciar</button>
+          </aside>
       </div>
-      <!-- MODAL -->
-      <div class="container-img">
-        <div class="row">
-          <div class="col-md-4">
-            <img
-              src="media/cianotipia1.jpg"
-              class="rounded float-start"
-              data-bs-toggle="modal"
-              data-bs-target="#modalImg1"
-              alt="cianotipia1"
-            />
-            <!-- Modal 1-->
-            <div
-              class="modal fade"
-              id="modalImg1"
-              tabindex="-1"
-              aria-labelledby="exampleModalLabel"
-              aria-hidden="true"
-            >
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">
-                      Cuaderno Cianotipiado Medio
-                    </h1>
-                    <button
-                      type="button"
-                      class="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    ></button>
-                  </div>
-                  <div class="modal-body">
-                    CIANOTIPIA MEDIANOS:
-                    <li>80 páginas</li>
-                    <li>Tamaño 12x18 cm</li>
-                    <li>
-                      Hojas blancas tipo croquis o con trama de puntos impresas
-                      en risografía en azul y rosa flúor
-                    </li>
-                    <li>Incluye hoja de guarda</li>
-                    <li>Encuadernación con cadeneta.</li>
-                    <div style="float: right; padding-right: 20px">
-                      Valor: $5.000
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button
-                      type="button"
-                      class="btn btn-secondary"
-                      data-bs-dismiss="modal"
-                    >
-                      Cerrar
-                    </button>
-                    <button type="button" class="btn btn-primary">
-                      Añadir al Carro
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+  </div>
 
-          <div class="col-md-4">
-            <img
-              src="media/cianotipia18.jpg"
-              class="img-fluid"
-              data-bs-toggle="modal"
-              data-bs-target="#modalImg2"
-              alt="cianotipia1"
-            />
-            <!-- Modal 2-->
-            <div
-              class="modal fade"
-              id="modalImg2"
-              tabindex="-1"
-              aria-labelledby="exampleModalLabel"
-              aria-hidden="true"
-            >
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">
-                      Cuaderno con tapa en Cianotipia y encuadernación Copta.
-                    </h1>
-                    <button
-                      type="button"
-                      class="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    ></button>
-                  </div>
-                  <div class="modal-body">
-                    <li>
-                      50 hojas / 100 páginas tamaño ½ carta(uno en papel
-                      reciclado y el otro intercalado entre papel hilado
-                      (blanco) y Bond Ahuesado)
-                    </li>
-                    <li>
-                      La Encuadernación Copta te permite abrir el cuaderno
-                      completamente en 180° (incluso más), no molesta al
-                      escribir ni dibujar.
-                    </li>
-                    <div style="float: right; padding-right: 20px">
-                      Valor: $5.000
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button
-                      type="button"
-                      class="btn btn-secondary"
-                      data-bs-dismiss="modal"
-                    >
-                      Cerrar
-                    </button>
-                    <button type="button" class="btn btn-primary">
-                      Añadir al Carro
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
 
-          <div class="col-md-4">
-            <img
-              src="media/cianotipia17.jpg"
-              class="rounded"
-              data-bs-toggle="modal"
-              data-bs-target="#modalImg3"
-              alt="cianotipia1"
-            />
-            <!-- Modal 3-->
-            <div
-              class="modal fade"
-              id="modalImg3"
-              tabindex="-1"
-              aria-labelledby="exampleModalLabel"
-              aria-hidden="true"
-            >
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">
-                      Cuaderno con tapa en Cianotipia
-                    </h1>
-                    <button
-                      type="button"
-                      class="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    ></button>
-                  </div>
-                  <div class="modal-body">
-                    <li>
-                      Encuadernación copta con papel reciclado en su interior.
-                    </li>
-                    <li>140 páginas de tamaño ½ carta.</li>
-                    <li>
-                      Incluye postal(realizada en esta técnica fotográfica
-                      artesanal).
-                    </li>
-                    <div style="float: right; padding-right: 20px">
-                      Valor: $6.000
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button
-                      type="button"
-                      class="btn btn-secondary"
-                      data-bs-dismiss="modal"
-                    >
-                      Cerrar
-                    </button>
-                    <button type="button" class="btn btn-primary">
-                      Añadir al Carro
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <!-- ENCUADERNACION FRANCESA -->
 
-      <div class="container">
-        <h5>Cuadernos Tapa Dura - Encuadernación Francesa</h5>
-      </div>
-      <!-- MODAL -->
-      <div class="container-img">
-        <div class="row">
-          <div class="col-md-4">
-            <img
-              src="media/cianotipia5.jpg"
-              class="rounded float-start"
-              data-bs-toggle="modal"
-              data-bs-target="#modalEFrancesa1"
-              alt="Encuadernación Francesa 1"
-            />
-            <!-- Modal 1-->
-            <div
-              class="modal fade"
-              id="modalEFrancesa1"
-              tabindex="-1"
-              aria-labelledby="exampleModalLabel"
-              aria-hidden="true"
-            >
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">
-                      Encuadernación Francesa
-                    </h1>
-                    <button
-                      type="button"
-                      class="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    ></button>
-                  </div>
-                  <div class="modal-body">
-                    <li>
-                      Portada en tapa dura, forradas con Cianotipia y Cartulina
-                      Gofrada de 235 gr
-                    </li>
-                    <li>
-                      Lomo flexible, puede abrirse el 180º especial para
-                      personas zurdas
-                    </li>
-                    <li>
-                      Interior en Bond Ahuesado de 80 gr, 100 hojas/200 páginas.
-                    </li>
-                    <li>
-                      Hojas del interior disponibles en blanco y en trama de
-                      puntos impreso en risografía (rosa flúor y azul).
-                    </li>
-                    <li>Tamaño: 13x18 cm (mediano-grande).</li>
-                    <li>Encuadernación francesa expuesta con cintas.</li>
-                    <div style="float: right; padding-right: 20px">
-                      Valor: $12.000
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button
-                      type="button"
-                      class="btn btn-secondary"
-                      data-bs-dismiss="modal"
-                    >
-                      Cerrar
-                    </button>
-                    <button type="button" class="btn btn-primary">
-                      Añadir al Carro
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <img
-              src="media/cianotipia22.jpg"
-              class="img-fluid"
-              data-bs-toggle="modal"
-              data-bs-target="#modalEFrancesa2"
-              alt="Encuadernación Francesa "
-            />
-            <!-- Modal 2-->
-            <div
-              class="modal fade"
-              id="modalEFrancesa2"
-              tabindex="-1"
-              aria-labelledby="exampleModalLabel"
-              aria-hidden="true"
-            >
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">
-                      Cuaderno con tapa en Cianotipia y encuadernación Copta.
-                    </h1>
-                    <button
-                      type="button"
-                      class="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    ></button>
-                  </div>
-                  <div class="modal-body">
-                    <li>
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                      Molestiae, pariatur veritatis debitis est quo, adipisci
-                      nihil sint similique, magni facere laborum saepe ad
-                      quibusdam facilis aperiam officia dignissimos quod.
-                      Deserunt!
-                    </li>
-                    <div style="float: right; padding-right: 20px">
-                      Valor: $12.000
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button
-                      type="button"
-                      class="btn btn-secondary"
-                      data-bs-dismiss="modal"
-                    >
-                      Cerrar
-                    </button>
-                    <button type="button" class="btn btn-primary">
-                      Añadir al Carro
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <img
-              src="media/cianotipia14.jpg"
-              class="rounded"
-              data-bs-toggle="modal"
-              data-bs-target="#modalEFrancesa3"
-              alt="Encuadernación Francesa 3"
-            />
-            <!-- Modal 3-->
-            <div
-              class="modal fade"
-              id="modalEFrancesa3"
-              tabindex="-1"
-              aria-labelledby="exampleModalLabel"
-              aria-hidden="true"
-            >
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">
-                      Cuaderno con tapa en Cianotipia
-                    </h1>
-                    <button
-                      type="button"
-                      class="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    ></button>
-                  </div>
-                  <div class="modal-body">
-                    <li>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    </li>
-                    <br />
-                    <div style="float: right; padding-right: 20px">
-                      Valor: $6.000
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button
-                      type="button"
-                      class="btn btn-secondary"
-                      data-bs-dismiss="modal"
-                    >
-                      Cerrar
-                    </button>
-                    <button type="button" class="btn btn-primary">
-                      Añadir al Carro
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- CIANOTIPIA EN TELA -->
-
-      <div class="container">
-        <h5>Cianotipia en Tela</h5>
-      </div>
-      <!-- MODAL -->
-      <div class="container-img">
-        <div class="row">
-          <div class="col-md-6">
-            <img
-              src="media/cianotipia23.jpg"
-              class="rounded float-start"
-              data-bs-toggle="modal"
-              data-bs-target="#CianotipiaTela1"
-              alt="Cianotipia en Tela 1"
-            />
-            <!-- Modal 1-->
-            <div
-              class="modal fade"
-              id="CianotipiaTela1"
-              tabindex="-1"
-              aria-labelledby="exampleModalLabel"
-              aria-hidden="true"
-            >
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">
-                      Cianotipia en Tela
-                    </h1>
-                    <button
-                      type="button"
-                      class="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    ></button>
-                  </div>
-                  <div class="modal-body">
-                    <li>
-                      Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                      Rerum placeat beatae ad sit incidunt.
-                    </li>
-                    <div>Valor: $12.000</div>
-                  </div>
-                  <div class="modal-footer">
-                    <button
-                      type="button"
-                      class="btn btn-secondary"
-                      data-bs-dismiss="modal"
-                    >
-                      Cerrar
-                    </button>
-                    <button type="button" class="btn btn-primary">
-                      Añadir al Carro
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6">
-            <img
-              src="media/cianotipia19.jpg"
-              class="img-fluid"
-              data-bs-toggle="modal"
-              data-bs-target="#CianotipiaTela2"
-              alt="Cianotipia en Tela 2"
-            />
-            <!-- Modal 2-->
-            <div
-              class="modal fade"
-              id="CianotipiaTela2"
-              tabindex="-1"
-              aria-labelledby="exampleModalLabel"
-              aria-hidden="true"
-            >
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">
-                      Cuaderno con tapa en Cianotipia y encuadernación Copta.
-                    </h1>
-                    <button
-                      type="button"
-                      class="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    ></button>
-                  </div>
-                  <div class="modal-body">
-                    <li>
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                      Molestiae, pariatur veritatis debitis est quo, adipisci
-                      nihil sint similique, magni facere laborum saepe ad
-                      quibusdam facilis aperiam officia dignissimos quod.
-                      Deserunt!
-                    </li>
-                    <div>Valor: $12.000</div>
-                  </div>
-                  <div class="modal-footer">
-                    <button
-                      type="button"
-                      class="btn btn-secondary"
-                      data-bs-dismiss="modal"
-                    >
-                      Cerrar
-                    </button>
-                    <button type="button" class="btn btn-primary">
-                      Añadir al Carro
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- TOTEBAGS XD -->
-
-      <div class="container">
-        <h5>ToteBags</h5>
-      </div>
-      <!-- MODAL -->
-      <div class="container-img">
-        <div class="row">
-          <div class="col-md-4">
-            <img
-              src="media/cianotipia15.jpg"
-              class="rounded float-start"
-              data-bs-toggle="modal"
-              data-bs-target="#modalTOTEBAGS1"
-              alt="TOTEBAGS1"
-            />
-            <!-- Modal 1-->
-            <div
-              class="modal fade"
-              id="modalTOTEBAGS1"
-              tabindex="-1"
-              aria-labelledby="exampleModalLabel"
-              aria-hidden="true"
-            >
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">
-                      Encuadernación Francesa
-                    </h1>
-                    <button
-                      type="button"
-                      class="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    ></button>
-                  </div>
-                  <div class="modal-body">
-                    <li>
-                      Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                      Possimus obcaecati dolor qui aut.
-                    </li>
-                    <div>Valor: $12.000</div>
-                  </div>
-                  <div class="modal-footer">
-                    <button
-                      type="button"
-                      class="btn btn-secondary"
-                      data-bs-dismiss="modal"
-                    >
-                      Cerrar
-                    </button>
-                    <button type="button" class="btn btn-primary">
-                      Añadir al Carro
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <img
-              src="media/cianotipia20.jpg"
-              class="img-fluid"
-              data-bs-toggle="modal"
-              data-bs-target="#modalTOTEBAGS2"
-              alt="TOTEBAGS 2 "
-            />
-            <!-- Modal 2-->
-            <div
-              class="modal fade"
-              id="modalTOTEBAGS2"
-              tabindex="-1"
-              aria-labelledby="exampleModalLabel"
-              aria-hidden="true"
-            >
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">
-                      Cuaderno con tapa en Cianotipia y encuadernación Copta.
-                    </h1>
-                    <button
-                      type="button"
-                      class="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    ></button>
-                  </div>
-                  <div class="modal-body">
-                    <li>
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                      Molestiae, pariatur veritatis debitis est quo, adipisci
-                      nihil sint similique, magni facere laborum saepe ad
-                      quibusdam facilis aperiam officia dignissimos quod.
-                      Deserunt!
-                    </li>
-                    <div>Valor: $12.000</div>
-                  </div>
-                  <div class="modal-footer">
-                    <button
-                      type="button"
-                      class="btn btn-secondary"
-                      data-bs-dismiss="modal"
-                    >
-                      Cerrar
-                    </button>
-                    <button type="button" class="btn btn-primary">
-                      Añadir al Carro
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <img
-              src="media/cianotipia21.jpg"
-              class="rounded"
-              data-bs-toggle="modal"
-              data-bs-target="#modalTOTEBAGS3"
-              alt="TOTEBAGS 3"
-            />
-            <!-- Modal 3-->
-            <div
-              class="modal fade"
-              id="modalTOTEBAGS3"
-              tabindex="-1"
-              aria-labelledby="exampleModalLabel"
-              aria-hidden="true"
-            >
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">
-                      Cuaderno con tapa en Cianotipia
-                    </h1>
-                    <button
-                      type="button"
-                      class="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    ></button>
-                  </div>
-                  <div class="modal-body">
-                    <li>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    </li>
-                    <div>Valor: $6.000</div>
-                  </div>
-                  <div class="modal-footer">
-                    <button
-                      type="button"
-                      class="btn btn-secondary"
-                      data-bs-dismiss="modal"
-                    >
-                      Cerrar
-                    </button>
-                    <button type="button" class="btn btn-primary">
-                      Añadir al Carro
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <footer>
       <div class="footer">
         <article class="columna">
         <h2>Litorales Creaciones</h2>
-        <img style="width:auto; height: 150px; border-radius:50%" src="media/logo1.jpg" alt="">
+        <img style="width:auto; height: 150px; border-radius:50%" src="{% static 'media/logo1.jpg'%}" alt="">
       </article>
       <article class="columna">
         <p>Pyme dedicada a la confección de productos artesanales ubicada en la V Región</p>

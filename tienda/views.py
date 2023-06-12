@@ -5,7 +5,7 @@ def index(request):
     return render(request,'tienda/index.html')
 
 def carro(request):
-    return render(request,'tienda/carro.html')
+    return render(request,'tienda/resumen.html')
 
 def galeria(request):
     return render(request,'tienda/galeria.html')

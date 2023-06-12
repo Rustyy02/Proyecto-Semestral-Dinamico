@@ -1,0 +1,332 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'estilos.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Karla:wght@200;300;400&display=swap" rel="stylesheet">
+    <title>Litorales Creaciones</title>
+
+
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg" style="background-color:midnightblue">
+    <div class="container-fluid">
+      <a class="navbar-brand" class="fs-3">Litorales Creaciones <img id="logo" src="{% static 'media/logo1.jpg'%}" alt="logoL"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="index">Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="tecnicas">Técnicas</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="galeria">Galería</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="catalogo">Catalogo</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="resumen">Carro</a>
+            </li>
+              <li class="nav-item">
+                <a class="nav-link" href="login">Ingresar</a>
+              </li>
+            </ul>
+          </div>
+    </div>
+  </nav>
+
+<h1 class="titulo1">Resumen Carro</h1>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+
+      // Variables
+      const baseDeDatos = [
+          {
+              id: 1,
+              nombre: 'Encuadernación Francesa',
+              precio: 12000,
+              imagen: '{% static 'media/cianotipia5.jpg'%}'
+          },
+          {
+              id: 2,
+              nombre: 'Encuadernación Japonesa',
+              precio: 10000,
+              imagen: 'cebolla.jpg'
+          },
+          {
+              id: 3,
+              nombre: 'Calabacin',
+              precio: 8000,
+              imagen: 'calabacin.jpg'
+          },
+          {
+              id: 4,
+              nombre: 'Fresas',
+              precio: 9000,
+              imagen: 'fresas.jpg'
+          },
+          {
+            id: 5,
+            nombre: 'Totebag con Cianotipia',
+            precio: 6000,
+            imagen: 'algo.jpg'
+          },
+          {
+            id: 6,
+            nombre: 'Algo',
+            precio: 7000,
+            imagen: ''
+          }
+
+      ];
+
+      let carrito = [];
+      const divisa = 'CLP';
+      const DOMitems = document.querySelector('#items');
+      const DOMcarrito = document.querySelector('#carrito');
+      const DOMtotal = document.querySelector('#total');
+      const DOMbotonSeguir = document.querySelector('#boton-seguir');
+      const DOMbotonPagar = document.querySelector('#boton-pagar');
+      const miLocalStorage = window.localStorage;
+
+// Funciones
+
+/**
+* Dibuja todos los productos a partir de la base de datos. No confundir con el carrito
+*/
+      function renderizarProductos() {
+          baseDeDatos.forEach((info) => {
+              // Estructura
+              const miNodo = document.createElement('div');
+              miNodo.classList.add('card', 'col-sm-4');
+              // Body
+              const miNodoCardBody = document.createElement('div');
+              miNodoCardBody.classList.add('card-body');
+              // Titulo
+              const miNodoTitle = document.createElement('h5');
+              miNodoTitle.classList.add('card-title');
+              miNodoTitle.textContent = info.nombre;
+              // Imagen
+              const miNodoImagen = document.createElement('img');
+              miNodoImagen.classList.add('img-fluid');
+              miNodoImagen.setAttribute('src', info.imagen);
+              // Precio
+              const miNodoPrecio = document.createElement('p');
+              miNodoPrecio.classList.add('card-text');
+              miNodoPrecio.textContent = `${info.precio}${divisa}`;
+              // Boton 
+              const miNodoBoton = document.createElement('button');
+              miNodoBoton.classList.add('btn', 'btn-primary');
+              miNodoBoton.textContent = '+';
+              miNodoBoton.setAttribute('marcador', info.id);
+              miNodoBoton.addEventListener('click', anyadirProductoAlCarrito);
+              // Insertamos
+              miNodoCardBody.appendChild(miNodoImagen);
+              miNodoCardBody.appendChild(miNodoTitle);
+              miNodoCardBody.appendChild(miNodoPrecio);
+              miNodoCardBody.appendChild(miNodoBoton);
+              miNodo.appendChild(miNodoCardBody);
+              DOMitems.appendChild(miNodo);
+          });
+      }
+
+/**
+* Evento para añadir un producto al carrito de la compra
+*/
+      function anyadirProductoAlCarrito(evento) {
+          // Anyadimos el Nodo a nuestro carrito
+          carrito.push(evento.target.getAttribute('marcador'))
+          // Actualizamos el carrito 
+          renderizarCarrito();
+          // Actualizamos el LocalStorage
+          guardarCarritoEnLocalStorage();
+      }
+
+/**
+* Dibuja todos los productos guardados en el carrito
+*/
+      function renderizarCarrito() {
+          // Vaciamos todo el html
+          DOMcarrito.textContent = '';
+          // Quitamos los duplicados
+          const carritoSinDuplicados = [...new Set(carrito)];
+          // Generamos los Nodos a partir de carrito
+          carritoSinDuplicados.forEach((item) => {
+              // Obtenemos el item que necesitamos de la variable base de datos
+              const miItem = baseDeDatos.filter((itemBaseDatos) => {
+                  // ¿Coincide las id? Solo puede existir un caso
+                  return itemBaseDatos.id === parseInt(item);
+              });
+              // Cuenta el número de veces que se repite el producto
+              const numeroUnidadesItem = carrito.reduce((total, itemId) => {
+                  // ¿Coincide las id? Incremento el contador, en caso contrario no mantengo
+                  return itemId === item ? total += 1 : total;
+              }, 0);
+              // Creamos el nodo del item del carrito
+              const miNodo = document.createElement('li');
+              miNodo.classList.add('list-group-item', 'text-right', 'mx-2');
+              miNodo.textContent = `${numeroUnidadesItem} x ${miItem[0].nombre} - ${miItem[0].precio}${divisa}`;
+              // Boton de borrar
+              const miBoton = document.createElement('button');
+              miBoton.classList.add('btn', 'btn-danger', 'mx-5');
+              miBoton.textContent = 'X';
+              miBoton.style.marginLeft = '1rem';
+              miBoton.dataset.item = item;
+              miBoton.addEventListener('click', borrarItemCarrito);
+              // Mezclamos nodos
+              miNodo.appendChild(miBoton);
+              DOMcarrito.appendChild(miNodo);
+          });
+          // Renderizamos el precio total en el HTML
+          DOMtotal.textContent = calcularTotal();
+      }
+
+      /**
+      * Evento para borrar un elemento del carrito
+      */
+      function borrarItemCarrito(evento) {
+          // Obtenemos el producto ID que hay en el boton pulsado
+          const id = evento.target.dataset.item;
+          // Borramos todos los productos
+          carrito = carrito.filter((carritoId) => {
+              return carritoId !== id;
+          });
+          // volvemos a renderizar
+          renderizarCarrito();
+          // Actualizamos el LocalStorage
+          guardarCarritoEnLocalStorage();
+
+      }
+
+      /**
+       * Calcula el precio total teniendo en cuenta los productos repetidos
+       */
+      function calcularTotal() {
+          // Recorremos el array del carrito 
+          return carrito.reduce((total, item) => {
+              // De cada elemento obtenemos su precio
+              const miItem = baseDeDatos.filter((itemBaseDatos) => {
+                  return itemBaseDatos.id === parseInt(item);
+              });
+              // Los sumamos al total
+              return total + miItem[0].precio;
+          }, 0).toFixed(2);
+      }
+
+
+      function botonSeguir(){
+        location.href = 'catalogo'
+      }
+
+      function botonPago(){
+
+      }
+
+      function guardarCarritoEnLocalStorage () {
+          miLocalStorage.setItem('carrito', JSON.stringify(carrito));
+      }
+
+      function cargarCarritoDeLocalStorage () {
+          // ¿Existe un carrito previo guardado en LocalStorage?
+          if (miLocalStorage.getItem('carrito') !== null) {
+              // Carga la información
+              carrito = JSON.parse(miLocalStorage.getItem('carrito'));
+          }
+      }
+
+      // Eventos
+      DOMbotonSeguir.addEventListener('click', botonSeguir);
+      DOMbotonPagar.addEventListener('click', botonPago);
+
+      // Inicio
+      cargarCarritoDeLocalStorage();
+      renderizarProductos();
+      renderizarCarrito();
+  });
+
+</script>
+
+
+<!-- Carrito -->
+
+<div class="container">
+  <div class="row">
+      <!-- Elementos generados a partir del JSON -->
+      <main id="items" class="col-sm-8 row"></main>
+      <!-- Carrito -->
+      <aside class="col-sm-4">
+          <h2>Carrito</h2>
+          <!-- Elementos del carrito -->
+          <ul id="carrito" class="list-group"></ul>
+          <hr>
+          <!-- Precio total -->
+          <p class="text-right">Total: <span id="total"></span> CLP</p>
+          <button id="boton-vaciar" class="btn btn-danger">Vaciar</button>
+          <button id="boton-pagar" class="btn btn-primary">Pagar</button>
+      </aside>
+  </div>
+</div>
+
+<p class="text-right">Total: <span id="total"></span> CLP</p>
+
+<div class="botonescompra">
+    <button id="boton-seguir" class = "btn btn-primary">Seguir Viendo</button>
+    <button id="boton-pago" class = "btn btn-primary">Pagar</button>
+</div>
+
+
+
+<footer>
+    <div class="footer">
+      <article class="columna">
+      <h2>Litorales Creaciones</h2>
+      <img style="width:auto; height: 150px; border-radius:50%" src="{% static 'media/logo1.jpg'%}" alt="">
+    </article>
+    <article class="columna">
+      <p>Pyme dedicada a la confección de productos artesanales ubicada en la V Región</p>
+    </article>
+      <article class="columna">
+        <h3 class="titulo-columna">Contacto</h3>
+        <ul>
+          <li><a class="footerLink" href="">Instagram</a></li>
+          <li><a class="footerLink" href="">Facebook</a></li>
+          <li><a class="footerLink" href="">Twitter</a></li>
+        </ul>
+      </article>
+      <article class="columna">
+        <ul>
+        <li><a class="footerLink" href="index">Inicio</a></li>
+        <li><a class="footerLink" href="tecnicas">Técnicas</a></li>
+        <li><a class="footerLink" href="galeria">Galeria</a></li>
+        <li><a class="footerLink" href="catalogo">Tienda</a></li>
+        <li><a class="footerLink" href="login">Ingresar</a></li>
+      </ul>
+      </article>
+    </div>
+    <div class="footer"><p>Copyright © 2023 Litorales Creaciones</p></div>
+</footer>
+  
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.min.js"
+    integrity="sha384-heAjqF+bCxXpCWLa6Zhcp4fu20XoNIA98ecBC1YkdXhszjoejr5y9Q77hIrv8R9i"
+    crossorigin="anonymous"></script>
+
+  </body>
+</html>

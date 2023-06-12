@@ -30,7 +30,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="index">Inicio</a>
+              <a class="nav-link" href="index">Inicio</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="tecnicas">Técnicas</a>
@@ -42,7 +42,7 @@
               <a class="nav-link" href="catalogo">Catálogo</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="carro">Carro</a>
+              <a class="nav-link" href="resumen">Carro</a>
           </li>
             <li class="nav-item">
               <a class="nav-link" href="login">Ingresar</a>
@@ -63,27 +63,39 @@
           const baseDeDatos = [
               {
                   id: 1,
-                  nombre: 'Patata',
-                  precio: 1,
-                  imagen: 'patata.jpg'
+                  nombre: 'Encuadernación Francesa',
+                  precio: 12000,
+                  imagen: '{% static 'media/cianotipia5.jpg'%}'
               },
               {
                   id: 2,
-                  nombre: 'Cebolla',
-                  precio: 1.2,
+                  nombre: 'Encuadernación Japonesa',
+                  precio: 10000,
                   imagen: 'cebolla.jpg'
               },
               {
                   id: 3,
                   nombre: 'Calabacin',
-                  precio: 2.1,
+                  precio: 8000,
                   imagen: 'calabacin.jpg'
               },
               {
                   id: 4,
                   nombre: 'Fresas',
-                  precio: 0.6,
+                  precio: 9000,
                   imagen: 'fresas.jpg'
+              },
+              {
+                id: 5,
+                nombre: 'Totebag con Cianotipia',
+                precio: 6000,
+                imagen: 'algo.jpg'
+              },
+              {
+                id: 6,
+                nombre: 'Algo',
+                precio: 7000,
+                imagen: ''
               }
 
           ];
@@ -94,6 +106,7 @@
           const DOMcarrito = document.querySelector('#carrito');
           const DOMtotal = document.querySelector('#total');
           const DOMbotonVaciar = document.querySelector('#boton-vaciar');
+          const DOMbotonPagar = document.querySelector('#boton-pagar');
           const miLocalStorage = window.localStorage;
 
 // Funciones
@@ -233,6 +246,11 @@
 
           }
 
+          function botonPago(){
+            location.href = "resumen"
+            return miLocalStorage;
+          }
+
           function guardarCarritoEnLocalStorage () {
               miLocalStorage.setItem('carrito', JSON.stringify(carrito));
           }
@@ -247,13 +265,16 @@
 
           // Eventos
           DOMbotonVaciar.addEventListener('click', vaciarCarrito);
+          DOMbotonPagar.addEventListener('click', botonPago);
 
           // Inicio
           cargarCarritoDeLocalStorage();
           renderizarProductos();
           renderizarCarrito();
       });
+
   </script>
+
 </head>
 <body>
   <div class="container">
@@ -267,14 +288,12 @@
               <ul id="carrito" class="list-group"></ul>
               <hr>
               <!-- Precio total -->
-              <p class="text-right">Total: <span id="total"></span>&euro;</p>
+              <p class="text-right">Total: <span id="total"></span> CLP</p>
               <button id="boton-vaciar" class="btn btn-danger">Vaciar</button>
+              <button id="boton-pagar" class="btn btn-primary">Pagar</button>
           </aside>
       </div>
   </div>
-
-
-
 
 
     <footer>
@@ -296,11 +315,11 @@
         </article>
         <article class="columna">
           <ul>
-          <li><a class="footerLink" href="index.html">Inicio</a></li>
-          <li><a class="footerLink" href="tecnicas.html">Técnicas</a></li>
-          <li><a class="footerLink" href="galeria.html">Galeria</a></li>
-          <li><a class="footerLink" href="tienda.html">Tienda</a></li>
-          <li><a class="footerLink" href="login.html">Ingresar</a></li>
+          <li><a class="footerLink" href="index">Inicio</a></li>
+          <li><a class="footerLink" href="tecnicas">Técnicas</a></li>
+          <li><a class="footerLink" href="galeria">Galeria</a></li>
+          <li><a class="footerLink" href="catalogo">Tienda</a></li>
+          <li><a class="footerLink" href="login">Ingresar</a></li>
         </ul>
         </article>
       </div>

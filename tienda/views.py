@@ -35,7 +35,6 @@ def usuariolist(request):
     return render(request,'tienda/usuariolist.html',data)
 
 
-
 def usuarioadd(request):
     data={
         'form':agregarForm()
@@ -79,7 +78,7 @@ def productosList(request):
     data={
         'productos' : productos
     }
-    return render (request, 'tienda/productosList.html', data)
+    return render(request,'tienda/productosList.html',data)
 
 def productosAdd(request):
     data={
@@ -95,7 +94,7 @@ def productosAdd(request):
     return render(request,'tienda/productosAdd.html',data)
 
 def productosMod(request,id):
-    usuario=get_object_or_404(Usuario,id=id)
+    producto=get_object_or_404(Producto,id=id)
     
     data={
         'form':productoForm(instance=producto)
@@ -106,4 +105,9 @@ def productosMod(request,id):
             formulario.save()
             return redirect(to="productosList")
         data["form"]=formulario
+        
+def productosDel(request,id):
+    producto=get_object_or_404(Producto, id=id)
+    producto.delete()
+    return redirect(to="productosList")
 

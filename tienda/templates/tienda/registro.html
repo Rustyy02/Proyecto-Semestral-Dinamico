@@ -52,7 +52,7 @@
 
       <h1 class="titulo1">Crear una cuenta</h1>
 
-      <form action="" class="formulario" id="formulario" method="post">
+      <form action="" class="formulario" id="formulario" method="POST">
         {% csrf_token %}
 
         <!-- Grupo: Nombre -->
@@ -64,7 +64,7 @@
           </div>
           <p class="formulario__input-error">El nombre no puede contener números, solo letras.</p>
         </div>
-        
+
         <!-- Grupo: Contraseña -->
         <div class="formulario__grupo" id="grupo__password">
           <label for="password" class="formulario__label">Contraseña</label>

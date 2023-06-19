@@ -12,8 +12,11 @@ class Usuario(models.Model):
         return self.nombre
 
 class Producto(models.Model):
-    id = models.CharField(max_length=3)
     nombreProducto = models.CharField(max_length=50)
-    descripcionProducto = models.CharField(max_lenght=100)
-    precio = models.CharField(max_lenght=8)
-    stock = models.CharField(max_lenght=3)
+    descripcionProducto = models.CharField(max_length=200)
+    precio = models.CharField(max_length=8)
+    stock = models.CharField(max_length=3)
+    imagen = models.ImageField(upload_to='uploads/')
+    
+    def __str__(self):
+        return self.nombreProducto

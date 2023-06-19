@@ -8,5 +8,15 @@ urlpatterns=[
     path('login', views.login, name='login'),
     path('registro', views.registro, name='registro'),
     path('tecnicas', views.tecnicas, name='tecnicas'),
-    path('catalogo', views.catalogo, name='catalogo')
+    path('catalogo', views.catalogo, name='catalogo'),
+    
+    #Django
+    path('usuario-listar', views.usuariolist, name='usuariolist'),
+    path('usuario-agregar', views.usuarioadd, name='usuarioadd'),
+    path('usuario-modificar/<id>/', views.usuariomod, name='usuariomod'),
+    path('usuario-eliminar/<id>/', views.usuariodel, name='usuariodel'),
 ]
+
+
+
+

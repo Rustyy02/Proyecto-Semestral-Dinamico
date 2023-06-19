@@ -10,3 +10,10 @@ class Usuario(models.Model):
     
     def __str__(self):
         return self.nombre
+
+class Producto(models.Model):
+    id = models.CharField(max_length=3)
+    nombreProducto = models.CharField(max_length=50)
+    descripcionProducto = models.CharField(max_lenght=100)
+    precio = models.CharField(max_lenght=8)
+    stock = models.CharField(max_lenght=3)

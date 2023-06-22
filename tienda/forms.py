@@ -1,11 +1,12 @@
+from dataclasses import fields
 from django import forms
-from .models import Usuario
-from .models import Producto
+from django.forms import ModelForm
+from .models import Usuario, Producto
 
-class agregarForm(forms.ModelForm):
+class registroForm(ModelForm):
     class Meta:
         model=Usuario
-        fields='__all__'
+        fields=['nombre', 'password', 'correo', 'telefono']
         
 class productoForm(forms.ModelForm):
     class Meta:

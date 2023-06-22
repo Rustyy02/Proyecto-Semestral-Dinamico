@@ -4,7 +4,6 @@ from django.db import models
 class Usuario(models.Model):
     nombre = models.CharField(max_length=50)
     password = models.CharField(max_length=12)
-    password2 = models.CharField(max_length=12)
     correo=models.EmailField(unique=True)
     telefono=models.CharField(max_length=9)
     
@@ -16,7 +15,7 @@ class Producto(models.Model):
     descripcionProducto = models.CharField(max_length=200)
     precio = models.CharField(max_length=8)
     stock = models.CharField(max_length=3)
-    imagen = models.ImageField(upload_to='uploads/')
+    imagen = models.ImageField(upload_to='tienda/uploads/')
     
     def __str__(self):
         return self.nombreProducto

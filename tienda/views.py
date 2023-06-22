@@ -1,8 +1,6 @@
-from django.shortcuts import render,redirect, get_object_or_404
-from .models import Usuario
-from .models import Producto
-from .forms import agregarForm
-from .forms import productoForm
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Usuario, Producto
+from .forms import registroForm, productoForm
 
 # Create your views here.
 def index(request):
@@ -18,7 +16,21 @@ def login(request):
     return render(request,'tienda/login.html')
 
 def registro(request):
-    return render(request,'tienda/registro.html')
+    if request.method != "POST":
+        return render(request,'tienda/registro.html')
+    else:
+        nombre=request.POST["nombre"]
+        password=request.POST["password"]
+        correo=request.POST["correo"]
+        telefono=request.POST["telefono"]
+        
+        obj=Usuario.objects.create( nombre=nombre,
+                                   password=password,
+                                   correo=correo,
+                                   telefono=telefono)
+        obj.save()
+        context={'mensaje':"Usuario registrado correctamente"}
+        return render(request, 'tienda/login.html', context)
 
 def tecnicas(request):
     return render(request,'tienda/tecnicas.html')
@@ -71,7 +83,7 @@ def usuariodel(request,id):
     return redirect(to="usuariolist")
 
 ##########################################################################
-##########################################################################
+################################PRODUCTOS##########################################
 
 def productosList(request):
     productos= Producto.objects.all()

@@ -11,10 +11,6 @@ urlpatterns=[
     path('catalogo', views.catalogo, name='catalogo'),
     
     #Django
-    path('usuario-listar', views.usuariolist, name='usuariolist'),
-    path('usuario-agregar', views.usuarioadd, name='usuarioadd'),
-    path('usuario-modificar/<id>/', views.usuariomod, name='usuariomod'),
-    path('usuario-eliminar/<id>/', views.usuariodel, name='usuariodel'),
     path('producto-listar', views.productosList, name='productosList'),
     path('producto-agregar', views.productosAdd, name='productosAdd'),
     path('producto-modificar/<id>/', views.productosMod, name='productosMod'),

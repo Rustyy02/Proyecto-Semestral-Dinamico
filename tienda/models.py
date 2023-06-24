@@ -13,9 +13,9 @@ class Usuario(models.Model):
 class Producto(models.Model):
     nombreProducto = models.CharField(max_length=50)
     descripcionProducto = models.CharField(max_length=200)
-    precio = models.CharField(max_length=8)
+    precio = models.IntegerField(max_length=8)
     stock = models.CharField(max_length=3)
     imagen = models.ImageField(upload_to='tienda/uploads/')
     
     def __str__(self):
-        return self.nombreProducto
+        return f'{self.nombreProducto} -> {self.precio}'

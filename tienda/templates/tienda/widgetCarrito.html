@@ -2,36 +2,40 @@
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th scope="row" colspan="3" class="text-center">Carrito</th> 
+            <th scope="row" colspan="3" class="text-center" style="color:black">Carrito</th> 
         </tr>
         <tr>
-            <th scope="col">NOMBRE</th>
-            <th scope="col">PRECIO</th>
-            <th scope="col">CANTIDAD</th>
+            <th scope="col" style="color:black">NOMBRE</th>
+            <th scope="col" style="color:black">PRECIO</th>
+            <th scope="col" style="color:black">CANTIDAD</th>
+            <th scope="col" style="color:black">SUBTOTAL</th>
         </tr>
     </thead>
     <tbody>
     {% if request.session.carrito.items %}
     {% for key, value in request.session.carrito.items %}
     <tr>
-        <td>{{value.nombre}}</td>
-        <td>{{value.precio}}</td>
-        <td>{{value.total}}
-        <a href="{% url 'Add' value.producto_id %}" class="badge btn btn-dark badge-dark">+</a>
-        <a href="{% url 'Sub' value.producto_id %}" class="badge btn btn-dark badge-dark">-</a>
+        <td scope="col">{{value.nombre}}</td>
+        <td scope="col">{{value.total}}</td>
+        <td scope="col">{{value.cantidad}}
+            <a href="{% url 'Add' value.producto_id %}" class="badge btn btn-dark badge-dark">+</a>
+            <a href="{% url 'Sub' value.producto_id %}" class="badge btn btn-dark badge-dark">-</a>
         </td>
+        <td scope="col">{{value.total}}</td>
+            
+        
     </tr>
     {% endfor %}
     {% else %}
     <tr>
-    <td colspan="3">
+    <td colspan="4">
         <div class="alert alert-danger text-center"> Sin Productos </div>
     </td>
     </tr>
     {% endif %}
     <tr>
-        <th scope="row">Total:</th>
-        <td colspan="2">$ {{total_carrito}}</td>
+        <th scope="row" style="color:black">Total:</th>
+        <td colspan="2" style="color:black">$ {{total_carrito}}</td>
     </tr>
     </tbody>
 </table>

@@ -53,39 +53,29 @@
       </div>
     </nav>
 
-<div class="container">
-  <div class="row">
-    <div class="col-12 align-self-center"><h1 class="display-1">Tienda</h1></div>
-  </div>
-  <div class="row">
-      <div class="col-8">
-        <div class="row" style="padding: 10px 0;">
-          <div class="col-12">
-            <div class="row">
-              {% for producto in productos %}
 
-              <div class="col-6">
-                <div class="card" style="height: 10rem; width: 23rem; margin: 5px 0px">
-                  <div class="card-body">
-                    <img class="card-img-top">{{producto.imagen}}</img>
-                    <h5 class="card-title">{{producto.nombreProducto}}</h5>
-                    <p class="card-text">{{producto.precio}} CLP</p>
-                    <a href="{% url 'Add' producto.id %}" class="btn btn-primary">Agregar al carrito</a>
-                  </div>
-                </div>
-              </div>
+<h1 class="titulo1">Catálogo</h1>
 
-              {% endfor %}
-            </div>
+<div class="container-fluid">
+  <div class="row">
+    {% for producto in productos %}
+      <div class="col-4">
+        <div class="card">
+          <div class="card-body">
+            <img class="card-img-top">{{producto.imagen}}</img>
+            <h5 class="card-title">{{producto.nombreProducto}}</h5>
+            <p class="card-text">{{producto.precio}} CLP</p>
+            <a href="{% url 'Add' producto.id %}" class="btn btn-primary">Agregar al carrito</a>
           </div>
         </div>
       </div>
-        <div class="col-4">
-          {% include "tienda/widgetCarrito.html" %}
-        </div>
-      </div>
+    {% endfor %}
+    <div class="container-fluid" style="padding: 20px">
+      {% include "tienda/widgetCarrito.html" %}
     </div>
+
   </div>
+</div>
 
 
 

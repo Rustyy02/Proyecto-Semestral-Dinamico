@@ -35,7 +35,7 @@
                 <a class="nav-link" href="galeria">Galería</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="catalogo">Catalogo</a>
+                <a class="nav-link" href="catalogo">Catálogo</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="resumen">Carro</a>
@@ -50,7 +50,51 @@
 
 <h1 class="titulo1">Resumen Carro</h1>
 
+<div class="alert alert-primary" role="alert" style="margin: 20px">
+  <table class="table table-bordered">
+      <thead>
+          <tr>
+              <th scope="col" style="color:black">NOMBRE</th>
+              <th scope="col" style="color:black">PRECIO</th>
+              <th scope="col" style="color:black">CANTIDAD</th>
+              <th scope="col" style="color:black">SUBTOTAL</th>
+          </tr>
+      </thead>
+      <tbody>
+      {% if request.session.carrito.items %}
+      {% for key, value in request.session.carrito.items %}
+      <tr>
+          <td scope="col">{{value.nombre}}</td>
+          <td scope="col">{{value.total}}</td>
+          <td scope="col">{{value.cantidad}}</td>
+          <td scope="col" style="color:black">{{value.total}}</td>
+              
+          
+      </tr>
+      {% endfor %}
+      {% else %}
+      <tr>
+      <td colspan="4">
+          <div class="alert alert-danger text-center"> Sin Productos </div>
+      </td>
+      </tr>
+      {% endif %}
+      <tr>
+          <th scope="row" style="color:black">Total:</th>
+          <td colspan="2" style="color:black">$ {{total_carrito}}</td>
+      </tr>
+      </tbody>
+  </table>
+      </div>
+      <div class="row text-center">
+          <div class="col-4"><a href="{% url 'CLS' %}" class="btn btn-danger">Limpiar</a></div>
+          <div class="col-4"><a href="catalogo" class="btn btn-primary">Volver a catalogo</a></div>
+          <div class="col-4"><a href="#" class="btn btn-success">Pagar</a></div>
+      </div>
 
+<br>
+<br>
+<br>
 
 <footer>
     <div class="footer">

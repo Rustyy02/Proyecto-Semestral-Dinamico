@@ -48,7 +48,8 @@
       </nav>
 
 
-      <form action="" class="containerLogin" id="formularioLogin" method='GET'>
+      <form action="" class="containerLogin" id="formularioLogin" method='POST'>
+      {% csrf_token %}
         <div class="form-group">
           <h1 id="textoh1Login">Login</h1>
           <i class="fa-solid fa-user"></i>

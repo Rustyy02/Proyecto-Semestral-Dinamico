@@ -8,7 +8,6 @@
             <th scope="col" style="color:black">NOMBRE</th>
             <th scope="col" style="color:black">PRECIO</th>
             <th scope="col" style="color:black">CANTIDAD</th>
-            <th scope="col" style="color:black">SUBTOTAL</th>
         </tr>
     </thead>
     <tbody>
@@ -21,14 +20,13 @@
             <a href="{% url 'Add' value.producto_id %}" class="badge btn btn-dark badge-dark">+</a>
             <a href="{% url 'Sub' value.producto_id %}" class="badge btn btn-dark badge-dark">-</a>
         </td>
-        <td scope="col">{{value.total}}</td>
             
         
     </tr>
     {% endfor %}
     {% else %}
     <tr>
-    <td colspan="4">
+    <td colspan="3">
         <div class="alert alert-danger text-center"> Sin Productos </div>
     </td>
     </tr>

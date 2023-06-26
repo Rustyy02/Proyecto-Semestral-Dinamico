@@ -89,7 +89,7 @@ def productosAdd(request):
     return render(request,'tienda/productosAdd.html',data)
 
 def productosMod(request,id):
-    producto=get_object_or_404(Producto,id=id)
+    producto=get_object_or_404(Producto, id=id)
     
     data={
         'form':productoForm(instance=producto)

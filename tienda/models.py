@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import DateField
 
 
 class Usuario(models.Model):
@@ -19,3 +20,4 @@ class Producto(models.Model):
     
     def __str__(self):
         return f'{self.nombreProducto} -> {self.precio}'
+    

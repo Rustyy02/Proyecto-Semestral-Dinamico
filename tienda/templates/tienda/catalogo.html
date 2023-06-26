@@ -62,8 +62,9 @@
       <div class="col-4">
         <div class="card">
           <div class="card-body">
-            <img class="card-img-top">{{producto.imagen}}</img>
+            <img class="card-img-top" src="{{ producto.imagen }}">
             <h5 class="card-title">{{producto.nombreProducto}}</h5>
+            <P class="card-text">{{producto.descripcionProducto}}</p>
             <p class="card-text">{{producto.precio}} CLP</p>
             <a href="{% url 'Add' producto.id %}" class="btn btn-primary">Agregar al carrito</a>
           </div>
@@ -76,10 +77,6 @@
 
   </div>
 </div>
-
-
-
-
 
 <br>
 <br>

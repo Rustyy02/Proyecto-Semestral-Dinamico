@@ -15,7 +15,7 @@ urlpatterns=[
     #Django
     path('producto-listar', views.productosList, name='productosList'),
     path('producto-agregar', views.productosAdd, name='productosAdd'),
-    path('producto-modificar/<id>/', views.productosMod, name='productosMod'),
+    path('productosMod/<id>/', views.productosMod, name='productosMod'),
     path('producto-eliminar/<id>/', views.productosDel, name='productosDel'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

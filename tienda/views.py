@@ -83,7 +83,7 @@ def productosAdd(request):
         formulario=productoForm(data=request.POST)
         if formulario.is_valid():
             formulario.save()
-            data["mensaje"]="Producto guardado"
+            data["mensaje"]="Producto guardado" # type: ignore
         else:
             data['form']=formulario
     return render(request,'tienda/productosAdd.html',data)
@@ -95,11 +95,12 @@ def productosMod(request,id):
         'form':productoForm(instance=producto)
     }
     if request.method == 'POST':
-        formulario=productoForm(data=request.POST,instance=producto)
+        formulario=productoForm(data=request.POST,instance=producto,files=request.FILES)
         if formulario.is_valid():
             formulario.save()
             return redirect(to="productosList")
         data["form"]=formulario
+    return render(request,'tienda/productosMod.html',data)
         
 def productosDel(request,id):
     producto=get_object_or_404(Producto, id=id)

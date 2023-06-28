@@ -39,8 +39,9 @@ def logoutUsuario(request):
     return redirect ('login')
 
 
-
+#########################
 def registro(request):
+    #### FUNCION NO UTILIZADA
     if request.method != "POST":
         return render(request,'tienda/registro.html')
     else:
@@ -56,6 +57,8 @@ def registro(request):
         obj.save()
         context={'mensaje':"Usuario registrado correctamente"}
         return render(request, 'login', context)
+#########################
+
 
 def registroDjango(request):
     form = CrearUsuarioForm()

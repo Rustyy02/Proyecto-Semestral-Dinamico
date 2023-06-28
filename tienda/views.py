@@ -26,7 +26,7 @@ def login(request):
         user=authenticate(request, username=username, password=password)
         
         if user is not None:
-            login2(request, user) # type: ignore
+            login2(request, user)
             return redirect('index')
         else:
             messages.info(request, 'Nombre de usuario o contraseña son incorrectos')

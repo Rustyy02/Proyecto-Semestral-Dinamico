@@ -143,10 +143,13 @@
                   <div class="d-flex justify-content-center mt-3 login_container">
                      <input class="btn login_btn" type="submit" value="Login">
                      </div>
-              </form>
-    
+              </form>    
             </div>
-        
+
+            {% for message in messages %}
+            <p id="messages">{{message}}</p>
+            {% endfor %}
+
             <div class="mt-4">
               <div class="d-flex justify-content-center links" style="color:white">
                 No tienes una cuenta? <a href="{% url 'registroDjango' %}" class="ml-2">Registrarse</a>

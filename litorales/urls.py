@@ -18,6 +18,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.auth import views as auth_views
 
 from tienda.views import agregar_producto,eliminar_producto,restar_producto,limpiar_carrito
 
@@ -28,5 +29,6 @@ urlpatterns = [
     path('eliminar/<int:producto_id>/', eliminar_producto, name="Del"),
     path('restar/<int:producto_id>/', restar_producto, name="Sub"),
     path('limpiar/', limpiar_carrito, name="CLS"),
-    path('accounts/', include('django.contrib.auth.urls')), 
+
+
 ]

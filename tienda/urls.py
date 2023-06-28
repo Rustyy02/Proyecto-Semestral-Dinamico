@@ -2,6 +2,7 @@ from django.conf import settings
 from django.urls import path
 from . import views
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
 
 urlpatterns=[
     path('index', views.index, name='index'),
@@ -19,6 +20,8 @@ urlpatterns=[
     path('producto-agregar', views.productosAdd, name='productosAdd'),
     path('productosMod/<id>/', views.productosMod, name='productosMod'),
     path('producto-eliminar/<id>/', views.productosDel, name='productosDel'),
+    path('login', auth_views.LoginView.as_view(template_name = "login.html"), name='login'),
+    path('logout', auth_views.LoginView.as_view(), name='logout'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

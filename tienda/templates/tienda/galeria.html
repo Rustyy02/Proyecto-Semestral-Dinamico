@@ -41,12 +41,12 @@
         </li>
         {% if perms.tienda.view_producto%}
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'productosList' %}">Listado</a>
+          <a class="nav-link" href="{% url 'productosList' %}">Panel de Control</a>
         </li>
         {% endif%}
       {% if request.user.is_authenticated%}
       <li class="nav-item">
-        <a  class="nav-link" href="{% url 'logout' %}">cerrar sesión</a>
+        <a  class="nav-link" href="{% url 'logout' %}">Cerrar sesión</a>
       </li>
       {%else%}
       <li class="nav-item">

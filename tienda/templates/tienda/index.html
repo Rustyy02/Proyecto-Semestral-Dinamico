@@ -43,12 +43,12 @@
           </li>
           {% if perms.tienda.view_producto%}
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'productosList' %}">Listado</a>
+            <a class="nav-link" href="{% url 'productosList' %}">Panel de Control</a>
           </li>
           {% endif%}
         {% if request.user.is_authenticated%}
         <li class="nav-item">
-          <a  class="nav-link" href="{% url 'logout' %}">cerrar sesión</a>
+          <a  class="nav-link" href="{% url 'logout' %}">Cerrar sesión</a>
         </li>
         {%else%}
         <li class="nav-item">
@@ -216,17 +216,17 @@
     document.querySelector(".viento").innerHTML = data.wind.speed + " km/h";
   
     if (data.weather[0].main == "Clouds"){
-      iconoclima.src = "media/clouds.png";
+      iconoclima.src = "{% static 'media/clouds.png'%}";
     }else if (data.weather[0].main == "Clear"){
-      iconoclima.src = "media/clear.png";
+      iconoclima.src = "{% static 'media/clear.png'%}";
     }else if (data.weather[0].main == "Rain"){
-      iconoclima.src = "media/rain.png";
+      iconoclima.src = "{% static 'media/rain.png'%}";
     }else if (data.weather[0].main == "Snow"){
-      iconoclima.src = "media/snow.png";
+      iconoclima.src = "{% static 'media/snow.png'%}";
     }else if (data.weather[0].main == "Drizzle"){
-      conoclima.src = "media/drizzle.png";
+      conoclima.src = "{% static 'media/drizzle.png'%}";
     }else if (data.weather[0].main == "Mist"){
-      conoclima.src = "media/mist.png";
+      conoclima.src = "{% static 'media/mist.png'%}";
     }
 
     if(data.weather[0].main == "Clear"){

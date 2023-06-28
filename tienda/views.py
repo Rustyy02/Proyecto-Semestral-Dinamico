@@ -31,7 +31,7 @@ def registro(request):
                                    telefono=telefono)
         obj.save()
         context={'mensaje':"Usuario registrado correctamente"}
-        return render(request, 'tienda/login.html', context)
+        return render(request, 'login', context)
 
 def tecnicas(request):
     return render(request,'tienda/tecnicas.html')

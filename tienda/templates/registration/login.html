@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Karla:wght@200;300;400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
-<title>Listado</title>
+<title>Agregar</title>
 <script defer src="{% static 'validaciones.js'%}"></script>   
     
      
@@ -55,56 +55,60 @@
     </div>
   </nav>
 
-      <br>
-      <br>
-      <br>
-      <br>
-            <div class="container">
-                <div class="row">
-                    <h1>Listado de Productos</h1>
-                </div>
-                <br>
-                <div class="row mb-3">
-                  <table class="table table-bordered" id="productos">
-                      <thead class="table-dark">
-                          <tr>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Descripcion</th>
-                            <th scope="col">Precio</th>
-                            <th scope="col">Stock</th>
-                            <th scope="col">Imagen</th>
-                            <th scope="col">Opciones</th>
-                            <th scope="col"></th>
-                          </tr>
-                      </thead>
-                      {% for auxlist in productos%}
-                      <tr>
-                        <td>{{auxlist.nombreProducto}}</td>
-                        <td>{{auxlist.descripcionProducto}}</td>
-                        <td>{{auxlist.precio}}</td>
-                        <td>{{auxlist.stock}}</td>
-                        {% if auxlist.imagen%}
-                        <td><img style="height: 500px;" src="{{ auxlist.imagen.url}}" alt=""></td>
-                        {% else %}
-                        <td><img src="/tienda/uploads/cianotipia1.jpg" alt="a"></td>
-                        {% endif%}
-                        <td>
-                          {% if perms.tienda.change_producto%}
-                          <a href="{% url 'productosMod' auxlist.id%}" class="btn btn-info btn-sm">Modificar</a>
-                        </td>
-                        {% endif %} 
-                        {% if perms.tienda.delete_producto%} 
-                        <td>
-                          <a href="{% url 'productosDel' auxlist.id%}" class="btn btn-danger btn-sm">Eliminar</a>
-                        </td>
-                        {% endif %} 
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6 offser-md-3">
 
-                        </tr>
-                          {% endfor %}
-                  </table>
+                <div class="card">
+                    <div class="card-body">
+                        <h2>Ingresar Datos</h2>
+                        <hr>
+                        <form action="" method="post">
+                        {% csrf_token %}
+                        {{ form }}
+
+                        <input type="submit" value="ingresar">
+                      </form>
+                    </div>
                 </div>
+
             </div>
+        </div>
 
+    </div>
+
+
+
+<style>
+  input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+
+.container{
+  margin: 15vh;
+  margin-left:31vw;
+}
+
+  form label{
+      font-size: 18px;
+      color: #000000;
+      font-family: "Poppins", sans-serif;
+      display: block;
+  }
+  .card-body h2{
+      text-align: center;
+      padding: 10px 20;
+      font-family: "Poppins", sans-serif;
+  }
+  
+</style>
 
 
       <footer>

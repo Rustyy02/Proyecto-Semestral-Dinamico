@@ -90,7 +90,6 @@ def productosAdd(request):
 
 def productosMod(request,id):
     producto=get_object_or_404(Producto, id=id)
-    
     data={
         'form':productoForm(instance=producto)
     }
@@ -101,7 +100,8 @@ def productosMod(request,id):
             return redirect(to="productosList")
         data["form"]=formulario
     return render(request,'tienda/productosMod.html',data)
-        
+
+
 def productosDel(request,id):
     producto=get_object_or_404(Producto, id=id)
     producto.delete()

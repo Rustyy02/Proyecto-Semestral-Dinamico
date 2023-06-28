@@ -28,6 +28,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_REDIRECT_URL = '/tienda/index'
+LOGOUT_REDIRECT_URL = '/tienda/index'
 
 # Application definition
 
@@ -118,7 +120,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-
 STATIC_URL = 'static/'
 
 # Default primary key field type

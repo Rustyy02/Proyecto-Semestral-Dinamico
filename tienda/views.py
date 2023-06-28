@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Usuario, Producto
-from .forms import registroForm, productoForm
+from .models import *
+from .forms import *
 from tienda.Carrito import Carrito
-from django.contrib.auth.forms import UserCreationForm  
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
+from django.contrib.auth import authenticate, login as login2, logout
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
@@ -15,7 +18,27 @@ def galeria(request):
     return render(request,'tienda/galeria.html')
 
 def login(request):
-    return render(request,'tienda/login.html')
+    
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user=authenticate(request, username=username, password=password)
+        
+        if user is not None:
+            login2(request, user) # type: ignore
+            return redirect('index')
+        else:
+            messages.info(request, 'Nombre de usuario o contraseña son incorrectos')
+            
+    context = {}    
+    return render(request,'tienda/login.html', context)
+
+def logoutUsuario(request):
+    logout(request)
+    return redirect ('login')
+
+
 
 def registro(request):
     if request.method != "POST":
@@ -35,13 +58,23 @@ def registro(request):
         return render(request, 'login', context)
 
 def registroDjango(request):
-    form = UserCreationForm
+    form = CrearUsuarioForm()
+    
+    if request.method == 'POST':
+        form = CrearUsuarioForm(request.POST)
+        if form.is_valid():
+            form.save()
+            usuario = form.cleaned_data.get('username')
+            messages.success(request, 'Cuenta creada exitosamente para ' + usuario)
+            return redirect('login')
+            
     context = {'form':form}
     return render(request, 'tienda/registroDjango.html', context)
 
 def tecnicas(request):
     return render(request,'tienda/tecnicas.html')
 
+@login_required(login_url='login')
 def catalogo(request):
     
     productos = Producto.objects.all()

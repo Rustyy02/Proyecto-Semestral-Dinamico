@@ -45,16 +45,18 @@
             <a class="nav-link" href="{% url 'productosList' %}">Panel de Control</a>
           </li>
           {% endif %}
-        {% if request.user.is_authenticated%}
-        <li class="nav-item">
-          <a  class="nav-link" href="{% url 'logout' %}">Cerrar sesión</a>
-        </li>
-        {%else%}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'login'%}">Iniciar sesión</a>
-        </li>
-        {% endif%}
-        </ul>
+          {% if request.user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="#"> Hola, {{request.user}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href ="{% url 'logout'%}"> Cerrar Sesión</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">Ingresar</a>
+          </li>
+          {% endif %}
       </div>
     </div>
   </nav>

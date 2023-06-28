@@ -8,9 +8,11 @@ urlpatterns=[
     path('resumen', views.carro, name='resumen'),
     path('galeria', views.galeria, name='galeria'),
     path('login', views.login, name='login'),
+    path('logout', views.logoutUsuario, name='logout'),
     path('registro', views.registro, name='registro'),
     path('tecnicas', views.tecnicas, name='tecnicas'),
     path('catalogo', views.catalogo, name='catalogo'),
+    path('registroDjango', views.registroDjango, name='registroDjango'),
     
     #Django
     path('producto-listar', views.productosList, name='productosList'),

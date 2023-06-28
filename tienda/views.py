@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Usuario, Producto
 from .forms import registroForm, productoForm
 from tienda.Carrito import Carrito
+from django.contrib.auth.forms import UserCreationForm  
 
 # Create your views here.
 def index(request):
@@ -32,6 +33,11 @@ def registro(request):
         obj.save()
         context={'mensaje':"Usuario registrado correctamente"}
         return render(request, 'login', context)
+
+def registroDjango(request):
+    form = UserCreationForm
+    context = {'form':form}
+    return render(request, 'tienda/registroDjango.html', context)
 
 def tecnicas(request):
     return render(request,'tienda/tecnicas.html')

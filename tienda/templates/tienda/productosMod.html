@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,37 +19,42 @@
 </head>
 <body>
     
-    <nav class="navbar navbar-expand-lg" style="background-color:midnightblue">
-        <div class="container-fluid">
-          <a class="navbar-brand" class="fs-3">Litorales Creaciones <img id="logo" src="{% static 'media/logo1.jpg'%}" alt="logoL"></a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link" href="index">Inicio</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="tecnicas">Técnicas</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="galeria">Galería</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="catalogo">Catálogo</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="resumen">Carro</a>
-            </li>
-              <li class="nav-item">
-                <a class="nav-link" href="login">Ingresar</a>
-                
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+  <nav class="navbar navbar-expand-lg" style="background-color:midnightblue">
+    <div class="container-fluid">
+      <a class="navbar-brand" class="fs-3">Litorales Creaciones <img id="logo" src="{% static 'media/logo1.jpg' %}" alt="logoL"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'index' %}">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'tecnicas' %}">Técnicas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'galeria' %}">Galería</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'catalogo' %}">Catálogo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'resumen' %}">Carro</a>
+          </li>
+        {% if request.user.is_authenticated%}
+        <li class="nav-item">
+          <a  class="nav-link" href="{% url 'logout' %}">cerrar sesión</a>
+        </li>
+        {%else%}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'login'%}">Iniciar sesión</a>
+        </li>
+        {% endif%}
+        </ul>
+      </div>
+    </div>
+  </nav>
 <br>
 <br>
             <div class="row">
@@ -57,14 +63,15 @@
                         <div class="card-body">
                             <h2>Modificar Producto</h2>
                             <hr>
-                    <form action="" method="post">
+                    <form action="" method="POST">
 
                         {%csrf_token%}
                         {{ form }}
                         <div class="d-flex justify-content-end">
 
-                            <input type="submit" value="Modificar" class="btn btn-primary">
-                            <input type="submit" value="Cancelar" class="btn btn-secondary">
+                            
+                            <input id="a" type="submit" value="Cancelar" class="btn btn-secondary">
+                            <input id="b"type="submit" value="Modificar" class="btn btn-primary">
 
                         </div>
                         {{ mensaje }}
@@ -76,7 +83,60 @@
 
 
 
+      <style>
+        input {
+          width: 100%;
+          padding: 12px 20px;
+          margin: 8px 0;
+          display: inline-block;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+          margin-left: 100px;
+        }
+        
+        body{
+            padding: 10px;
+            height: 100vh;
+            min-height: 100vh;
+            padding: 0;
+            background-color: antiquewhite;
+            height: 100vh;
+            overflow: hidden;
+          }
+        form{
+            width: 680px;
+            height: 520px;
+        }
+        form label{
+            font-size: 18px;
+            color: #000000;
+            font-family: "Poppins", sans-serif;
+            display: block;
+            
+        }
+        .card-body h2{
+            text-align: center;
+            padding: 0px;
+            font-family: "Poppins", sans-serif;
+        }
+        .card{
+          margin: 50px;
+          padding-bottom: 15px;
+        }
 
+        #a{
+        position: relative;
+        left: -5vw;
+        }
+        #b{
+          position: relative;
+          right: -5vw;
+          }
+
+
+
+    </style>
 
 
 

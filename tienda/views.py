@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Usuario, Producto
 from .forms import registroForm, productoForm
+from tienda.Carrito import Carrito
 
 # Create your views here.
 def index(request):
@@ -36,8 +37,33 @@ def tecnicas(request):
     return render(request,'tienda/tecnicas.html')
 
 def catalogo(request):
-    return render(request,'tienda/catalogo.html')
+    
+    productos = Producto.objects.all()
+    
+    return render(request,'tienda/catalogo.html', {'productos': productos})
 
+def agregar_producto(request, producto_id):
+    carrito = Carrito(request)
+    producto = Producto.objects.get(id=producto_id)
+    carrito.agregar(producto)
+    return redirect ("catalogo")
+
+def eliminar_producto(request, producto_id):
+    carrito = Carrito(request)
+    producto = Producto.objects.get(id=producto_id)
+    carrito.eliminar(producto)
+    return redirect ("catalogo")
+
+def restar_producto(request, producto_id):
+    carrito = Carrito(request)
+    producto = Producto.objects.get(id=producto_id)
+    carrito.restar(producto)
+    return redirect ("catalogo")
+
+def limpiar_carrito(request):
+    carrito = Carrito(request)
+    carrito.limpiar()
+    return redirect ("catalogo")
 
 ##########################################################################
 ################################PRODUCTOS##########################################
@@ -57,24 +83,25 @@ def productosAdd(request):
         formulario=productoForm(data=request.POST)
         if formulario.is_valid():
             formulario.save()
-            data["mensaje"]="Producto guardado"
+            data["mensaje"]="Producto guardado" # type: ignore
         else:
             data['form']=formulario
     return render(request,'tienda/productosAdd.html',data)
 
 def productosMod(request,id):
-    producto=get_object_or_404(Producto,id=id)
-    
+    producto=get_object_or_404(Producto, id=id)
     data={
         'form':productoForm(instance=producto)
     }
     if request.method == 'POST':
-        formulario=productoForm(data=request.POST,instance=producto)
+        formulario=productoForm(data=request.POST,instance=producto,files=request.FILES)
         if formulario.is_valid():
             formulario.save()
             return redirect(to="productosList")
         data["form"]=formulario
-        
+    return render(request,'tienda/productosMod.html',data)
+
+
 def productosDel(request,id):
     producto=get_object_or_404(Producto, id=id)
     producto.delete()

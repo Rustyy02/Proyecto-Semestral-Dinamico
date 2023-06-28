@@ -19,38 +19,91 @@
 
   <nav class="navbar navbar-expand-lg" style="background-color:midnightblue">
     <div class="container-fluid">
-      <a class="navbar-brand" class="fs-3">Litorales Creaciones <img id="logo" src="{% static 'media/logo1.jpg'%}" alt="logoL"></a>
+      <a class="navbar-brand" class="fs-3">Litorales Creaciones <img id="logo" src="{% static 'media/logo1.jpg' %}" alt="logoL"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link" href="index">Inicio</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="tecnicas">Técnicas</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="galeria">Galería</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="catalogo">Catalogo</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="resumen">Carro</a>
-            </li>
-              <li class="nav-item">
-                <a class="nav-link" href="login">Ingresar</a>
-              </li>
-            </ul>
-          </div>
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'index' %}">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'tecnicas' %}">Técnicas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'galeria' %}">Galería</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'catalogo' %}">Catálogo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'resumen' %}">Carro</a>
+          </li>
+          {% if perms.tienda.view_producto%}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'productosList' %}">Listado</a>
+          </li>
+          {% endif%}
+        {% if request.user.is_authenticated%}
+        <li class="nav-item">
+          <a  class="nav-link" href="{% url 'logout' %}">cerrar sesión</a>
+        </li>
+        {%else%}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'login'%}">Iniciar sesión</a>
+        </li>
+        {% endif%}
+        </ul>
+      </div>
     </div>
   </nav>
 
 <h1 class="titulo1">Resumen Carro</h1>
 
+<div class="alert alert-primary" role="alert" style="margin: 20px">
+  <table class="table table-bordered">
+      <thead>
+          <tr>
+              <th scope="col" style="color:black">NOMBRE</th>
+              <th scope="col" style="color:black">PRECIO</th>
+              <th scope="col" style="color:black">CANTIDAD</th>
+          </tr>
+      </thead>
+      <tbody>
+      {% if request.session.carrito.items %}
+      {% for key, value in request.session.carrito.items %}
+      <tr>
+          <td scope="col">{{value.nombre}}</td>
+          <td scope="col">{{value.total}}</td>
+          <td scope="col">{{value.cantidad}}</td>
+              
+          
+      </tr>
+      {% endfor %}
+      {% else %}
+      <tr>
+      <td colspan="4">
+          <div class="alert alert-danger text-center"> Sin Productos </div>
+      </td>
+      </tr>
+      {% endif %}
+      <tr>
+          <th scope="row" style="color:black">Total:</th>
+          <td colspan="2" style="color:black">$ {{total_carrito}}</td>
+      </tr>
+      </tbody>
+  </table>
+      </div>
+      <div class="row text-center">
+          <div class="col-4"><a href="{% url 'CLS' %}" class="btn btn-danger">Limpiar</a></div>
+          <div class="col-4"><a href="catalogo" class="btn btn-primary">Volver a catalogo</a></div>
+          <div class="col-4"><a href="#" class="btn btn-success">Pagar</a></div>
+      </div>
 
+<br>
+<br>
+<br>
 
 <footer>
     <div class="footer">

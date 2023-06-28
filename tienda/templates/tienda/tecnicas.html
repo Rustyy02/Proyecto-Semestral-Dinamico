@@ -90,6 +90,129 @@
   </div>
   </section>
 
+  <section>
+    <div class="container">
+      <div class="card">
+        <div class="front">
+          <div class="content">
+            <img src="{% static 'media/cianotipia18.jpg'%}" />
+            <h3>Encuadernacion Japonesa</h3>
+          </div>
+        </div>
+        <div class="back">
+          <div class="content">
+            <p>
+              La encuadernación japonesa es uno de los tipos de encuadernado artesanal más antiguos que existen. Se lleva a cabo mediante un proceso completamente manual, y se asocia generalmente a la encuadernación de objetos personales y de cierto valor: álbumes de fotos artesanales, libros, diarios, etc.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="card">
+        <div class="front">
+          <div class="content">
+            <img src="{% static 'media/cianotipia14.jpg'%}" />
+            <h3>Encuadernación Francesa</h3>
+          </div>
+        </div>
+        <div class="back">
+          <div class="content">
+            <p>
+              Se trata de una encuadernación de libro que se lleva usando toda la vida. Es una de las opciones favoritas de los amantes de las manualidades. Asimismo, lo mejor es que permite conseguir una apertura superior a la de otras técnicas.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+    body {
+      background-color: antiquewhite;
+    }
+    section {
+      height: 100vh;
+      display: flex;
+      padding: 0 4em;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      align-items: center;
+    }
+    .container {
+      perspective: 1000px;
+      height: 40vh;
+      width: 100%;
+      cursor: pointer;
+    }
+    .card {
+      transform-style: preserve-3d;
+      height: 100%;
+      width: 100%;
+      transition: 0.5s ease;
+    }
+    .front,
+    .back {
+      height: 100%;
+      width: 100%;
+      transform-style: preserve-3d;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border-radius: 0.4em;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      backface-visibility: hidden;
+    }
+    .front {
+      background: linear-gradient(to right, midnightblue, #0075FF);
+    }
+    .front img {
+      width: 12em;
+    }
+    .content {
+      transform: translateZ(60px);
+    }
+    .content h3 {
+      font-size: 22px;
+      margin-top: 1em;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .content p {
+      font-size: 14px;
+      line-height: 2em;
+      letter-spacing: 0.02em;
+      padding: 0 3em;
+    }
+    .back {
+      background-color: #28253a;
+      transform: rotateX(180deg);
+    }
+    .container:hover .card {
+      transform: rotateX(180deg);
+    }
+    @media screen and (min-width: 992px) {
+      section {
+        padding: 0 1em;
+      }
+      .container {
+        flex-basis: 0 0 33.33%;
+        max-width: 33.33%;
+        padding: 0 1.5em;
+      }
+    }
+  </style>
+
 
 <footer>
   <div class="footer">

@@ -20,3 +20,7 @@ class Producto(models.Model):
     
     def __str__(self):
         return f'{self.nombreProducto} -> {self.precio}'
+    
+class Boleta(models.Model):
+    total = models.IntegerField(null=True)
+    fecha = models.DateField(auto_now_add=True)

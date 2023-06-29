@@ -118,17 +118,16 @@ def productosList(request):
     return render(request,'tienda/productosList.html',data)
 
 def productosAdd(request):
-    data={
-        'form':productoForm()
-    }
+    
+    context={'form' : productoForm()}
+    
     if request.method == 'POST':
-        formulario=productoForm(data=request.POST)
+        formulario=productoForm(request.POST, files=request.FILES)
         if formulario.is_valid():
             formulario.save()
-            data["mensaje"]="Producto guardado" # type: ignore
-        else:
-            data['form']=formulario
-    return render(request,'tienda/productosAdd.html',data)
+            context={'mensaje': "Nuevo producto agregado"} 
+
+    return render(request,'tienda/productosAdd.html', context)
 
 def productosMod(request,id):
     producto=get_object_or_404(Producto, id=id)

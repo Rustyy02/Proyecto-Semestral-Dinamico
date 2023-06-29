@@ -108,56 +108,40 @@
         </div>
     </div>
   </div>
-  </section>
+</section>
 
-  <div class="columnas-api">
-
-    <div class="mensaje-cianotipia-posible">
-      <p>Hoy existen condiciones adecuadas para realizar revelado solar!</p>
-      <div class="imgs-div">
-        <img src="{% static 'media/film.png'%}" alt="">
-        <img src="{% static 'media/yes.png'%}" alt="">
-      </div>
+<div class="columnas-api">
+  <div class="api-clima">
+    <div class="buscar">
+      <input type="text" placeholder="Ingrese Ciudad">
+      <button><img src="{% static 'media/buscar.jpg'%}" alt=""></button>
     </div>
-
-    <div class="api-clima">
-      <div class="buscar">
-        <input type="text" placeholder="Ingrese Ciudad">
-        <button><img src="{% static 'media/buscar.jpg'%}" alt=""></button>
-      </div>
-      <div class="error-api">
-          <p>Nombre de ciudad inválido</p>
-      </div> 
-      <div class="clima">
-          <img src="{% static 'media/rain.png'%}" class="icono-clima">
-          <h1 class="temperatura">0</h1>
-          <h2 class="ciudad"></h2>
-          <div class="detalles">
-            <div class="columna-api">
-              <img src="{% static 'media/humidity.png'%}">
-              <div>
-                <p class="humedad">0%</p>
-                <p>Humedad</p>
-              </div>
-            </div>
-            <div class="columna-api">
-              <img src="{% static 'media/wind.png'%}">
-              <div>
-                <p class="viento">0 km/h</p>
-                <p>Viento</p>
-              </div>
-            </div>
+    <div class="error-api">
+        <p>Nombre de ciudad inválido</p>
+    </div> 
+    <div class="clima">
+      <img src="{% static 'media/rain.png'%}" class="icono-clima">
+      <h1 class="temperatura">0</h1>
+      <h2 class="ciudad"></h2>
+      <div class="detalles">
+        <div class="columna-api">
+          <img src="{% static 'media/humidity.png'%}">
+          <div>
+            <p class="humedad">0%</p>
+            <p>Humedad</p>
           </div>
         </div>
-    </div>
-
-    <div class="mensaje-cianotipia-noposible">
-      <p>Hoy no es un día óptimo para realizar revelado solar</p>
-      <div class="imgs-div">
-        <img src="{% static 'media/film.png'%}" alt="">
-        <img src="{% static 'media/no.png'%}" alt="">
+        <div class="columna-api">
+          <img src="{% static 'media/wind.png'%}">
+          <div>
+            <p class="viento">0 km/h</p>
+            <p>Viento</p>
+          </div>
+        </div>
+      </div>
       </div>
     </div>
+  </div>
 </div>
 
 
@@ -215,7 +199,7 @@
     document.querySelector(".ciudad").innerHTML = data.name;
     document.querySelector(".temperatura").innerHTML = Math.round(data.main.temp) + "°C";
     document.querySelector(".humedad").innerHTML = Math.round(data.main.temp) + " %";
-    document.querySelector(".viento").innerHTML = data.wind.speed + " km/h";
+    document.querySelector(".viento").innerHTML = Math.round(data.wind.speed) + " km/h";
   
     if (data.weather[0].main == "Clouds"){
       iconoclima.src = "{% static 'media/clouds.png'%}";
@@ -232,11 +216,9 @@
     }
 
     if(data.weather[0].main == "Clear"){
-      document.querySelector(".mensaje-cianotipia-posible").style.display = "block"
-      document.querySelector(".mensaje-cianotipia-noposible").style.display = "none"
+
     }else{
-      document.querySelector(".mensaje-cianotipia-posible").style.display = "none"
-      document.querySelector(".mensaje-cianotipia-noposible").style.display = "block"
+
     }
 
     document.querySelector(".clima").style.display = "block";
@@ -250,8 +232,6 @@
   botonbusqueda.addEventListener("click", ()=>{
     checkWeather(busqueda.value);
   })
-
-
 </script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>

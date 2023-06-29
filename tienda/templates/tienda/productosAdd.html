@@ -58,30 +58,34 @@
   </nav>
 <br>
 <br>
-            <div class="row">
-                <div class="col-12 col-md-6 offset-md-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h2>Agregar Producto</h2>
-                            <hr>
 
-                    <form method="POST">
+<div class="row">
+    <div class="col-12 col-md-6 offset-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h2>Agregar Producto</h2>
+                <hr>
 
-                        {%csrf_token%}
-                        {{ form }}
-                        <div class="d-flex justify-content-end">
+        <form action="" method="POST" enctype="multipart/form-data">
 
-                            <input type="submit" value="Guardar" class="btn btn-primary">
-                            <input type="submit" value="Cancelar" class="btn btn-secondary">
-
-                        </div>
-                        {{ mensaje }}
-
-                    </form>
-                </div>
+            {%csrf_token%}
+            <div class="form-group" style="color:white">
+            {{ form.as_p }}
             </div>
-        </div>
+
+            <div class="d-flex justify-content-end">
+                <input type="submit" value="Guardar" class="btn btn-primary">
+                <a class="btn btn-secondary" href="producto-listar">Cancelar</a>
+            </div>
+            {% if mensaje %}
+            {{ mensaje }}
+            {% endif %}
+
+        </form>
       </div>
+    </div>
+  </div>
+</div>
 
 
 

@@ -20,4 +20,3 @@ class Producto(models.Model):
     
     def __str__(self):
         return f'{self.nombreProducto} -> {self.precio}'
-    
